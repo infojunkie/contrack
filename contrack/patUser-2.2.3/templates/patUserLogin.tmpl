@@ -1,0 +1,64 @@
+<patTemplate:tmpl name="patUserLogin">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>patUser - Login Template</title>
+<style type="text/css">
+TD			{font-family: Verdana, sans-serif; font-size: 11px; }
+INPUT		{font-family: Verdana, sans-serif; font-size: 11px; }
+</style>
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#cc0000" alink="#cc0000" vink="#cc0000">
+<form action="{PATUSER_SELF}" method="post">
+	<input type="Hidden" name="{PATUSER_ACTION}" value="login">
+
+	<table border="0" cellpadding="0" cellspacing="2">
+		<tr>
+			<td colspan="2">
+				<h4>{PATUSER_REALM}</h4>
+				<b>Please Login to continue</b>
+			</td>
+		</tr>
+<patTemplate:tmpl name="errorlist" visibility="hidden">
+		<tr>
+			<td colspan="2">
+				Please correct the following errors:<br><br>
+				
+				<patTemplate:tmpl name="error" type="condition" conditionvar="error_code">
+
+					<!-- You may add as many subtemplates as there are error codes in ortder
+						 to customzize output -->
+					<patTemplate:sub condition="1">
+					&middot;&nbsp;The given credentials did not match any user.<br>
+					</patTemplate:sub>
+
+					<patTemplate:sub condition="default">
+					&middot;&nbsp;Unknown error: {ERROR_MESSAGE} (#{ERROR_CODE})<br>
+					</patTemplate:sub>
+
+				</patTemplate:tmpl>
+			<br>
+			</td>
+		</tr>
+</patTemplate:tmpl>
+		<tr>
+			<td>Username:</td>
+			<td><input type="Text" name="{PATUSER_USERNAME}" value="{PATUSER_USERNAME_VALUE}"></td>
+		</tr>
+		<tr>
+			<td>Password: </td>
+			<td><input type="Password" name="{PATUSER_PASSWD}" value="{PATUSER_PASSWD_VALUE}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="Submit" value="LOGIN"></td>
+		</tr>
+	</table>
+</form>
+
+
+</body>
+</html>
+</patTemplate:tmpl>

@@ -1,0 +1,428 @@
+/*
+* Copyright OpenCraft |  http://www.open-craft.com
+* ------------------------------------------------------------------
+*
+* Contrack Order Management System
+*
+* Details and latest version at:
+* http://contrack.sourceforge.net
+*
+* $Id: $
+*
+* This software is distributed under the GNU General Public License.
+* Read the entire license text here: http://www.gnu.org/licenses/gpl.html
+*/
+
+/******************************************************************
+	Main CSS file for the application
+******************************************************************/
+body {
+	background-color: #fff; 
+	color: #000;
+	font-family: Verdana; 
+	font-size: 0.7em;
+	margin: 0;
+}
+select {
+	font-family: Verdana; 
+	font-size: 1em;
+}
+img {
+	border: none; 
+}
+table {
+	cell-spacing: 0;
+	border: 0;
+	width: 100%;
+}
+h4 {
+	font-size:1.2em;
+}
+a:link, a:active, a:visited {
+	text-decoration:underline;
+	color:#000;
+}
+a:hover {
+	text-decoration:none;
+	color:#000;
+}
+.about a:link,.about a:visited,.about a:active {
+	text-decoration:none;
+}
+.about a:hover {
+	text-decoration:underline;
+}
+.header {
+	font-weight: bold;
+	background-color: #D4D0C8;
+	color: #000;
+}
+.header a:link, .header a:visited, .header a:active  {
+	text-decoration:none;
+}
+.header a:hover {
+	text-decoration:underline;
+}
+.footer {
+	background-color: #D4D0C8;
+	font-size: smaller;
+	font-weight: normal;
+}
+.logo {
+	background-color: #fff;
+}
+.tabs{
+    font-weight : bold;
+	background: #996; 
+    text-align: center;
+}
+
+.tabs a:link, .tabs a:visited, .tabs a:active {
+	text-decoration : none;
+}
+
+.active_tab{
+	background:#D4D0C8;	
+	border-left:1px solid #000;
+	border-right:1px solid #000;
+	border-top:2px solid #000;
+	border-bottom:0px none #D4D0C8;
+	text-align:center;
+	height:2.75em;
+}
+.active_tab a:link, .active_tab a:visited, .active_tab a:active {
+	text-decoration:none;
+} 
+.active_tab a:hover {
+    text-decoration:none;    	
+	color:#000;
+} 
+.inactive_tab{
+	border:1px solid #000;
+	text-align:center;
+}
+/*
+.inactive_tab:hover {
+	background:#D4D0C8;	
+} 
+*/
+.inactive_tab a:link, .inactive_tab a:visited, .inactive_tab a:active {
+	text-decoration:none;
+} 
+.inactive_tab a:hover {
+    text-decoration:none;    	
+	color:#FFF;
+} 
+.disabled_tab{
+	border:1px solid #000;
+	text-align:center;
+	color:#BBA;
+}
+.blank_tab{
+	background: #fff;
+	border-bottom: 1px solid #000;
+	border-left:1px solid #000;
+	height:2.75em;
+}
+.tab_content{
+	background:#D4D0C8;
+	border-bottom:1px solid #000;
+	border-left:1px solid #000;
+	border-right:1px solid #000;
+	border-top:0px solid #D4D0C8;	
+}
+.con_table_header, .contacts_header, .lineitems_header, .milestones_header, .payments_header, 
+.attachments_header, .search_results_header {
+	background-color:#996;
+	color: #fff;
+	font-weight:bold;
+	text-align:left;
+}
+.con_table_line0, .contacts_line0, .lineitems_line0, .milestones_line0, .payments_line0, 
+.attachments_line0, .search_results0  {
+	background-color: #F6F6F6; 
+	color: #000;
+	text-align:left;
+}
+.con_table_line1, .contacts_line1, .lineitems_line1, .milestones_line1, .payments_line1, 
+.attachments_line1, .search_results1  {	
+	background-color: #C9CDAA; 
+	color: #000;
+	text-align:left;
+}
+.search_results_header a:link, .search_results_header a:visited, .search_results_header a:active  {
+	background-color:#996;
+	color: #fff;
+	font-weight:bold;
+	text-align:left;
+}	
+.search_results0  a:link, .search_results0 a:visited, .search_results0 a:active    {
+	background-color: #F6F6F6;
+	text-align:left;
+	text-decoration:none;	
+}
+.search_results0  a:hover {
+	text-decoration:underline;
+}
+.search_results1  a:link, .search_results1 a:visited, .search_results1 a:active  {
+	background-color: #C9CDAA; 
+	text-align:left;
+	text-decoration:none;	
+}
+.search_results1  a:hover {
+	text-decoration:underline;
+}
+.actions_header {
+	background-color:#996;
+	color: #fff;
+	font-weight:bold;
+	text-align:left;
+}	
+.actions_header td{
+	padding:0.1em 0.2em 0.1em 0.3em;
+}
+.formtext_stdwidth {
+	width: 156px;
+	border-width:1px;
+	border-color:#666;
+	border-style:solid;
+	font:Verdana;
+	font-size:1em;	
+}
+.formtext_longwidth {
+	width: 312px;
+	border-width:1px;
+	border-color:#666;
+	border-style:solid;
+	font:Verdana;
+	font-size:1em;
+}
+.short_width {
+	width: 64px;
+	border-width:1px;
+	border-color:#666;
+	border-style:solid;
+	font:Verdana;
+	font-size:1em;
+}
+.formtextarea{
+	border-width:1px;
+	border-color:#666;
+	border-style:solid;
+	color:#000; 
+	font:Verdana;	
+	font-size:1.3em;	
+	white-space:pre;
+}
+.contrack_notes {
+	white-space:pre;
+}
+.date_box{
+	width: 64px;
+	border-width:1px;
+	border-color:#666;
+	border-style:solid;
+	font-size:1em;	
+}
+.contrack_button {
+	border-width:2px;
+	border-color:#FFF;
+	border-style:outset;
+	background-color:#996;
+	color:#FFF;
+	font-weight:600;
+	font-size:1em;	
+}
+.filebrowse{
+	color:#000; 
+	background:#FFF;
+	border-width:1px;
+	border-color:#666;
+	border-style:solid;
+	font-size:1em;	
+}
+.small_text {
+	font-size: x-small;
+	color: #000;
+	text-align:center;
+}
+.small_text a:link, .small_text a:visited, .small_text a:active {
+	font-size: x-small;
+	color: #000;
+	text-decoration:none;
+}
+.small_text a:hover {
+	text-decoration:underline;
+}
+.production_header {
+	background-color:#999966;
+	color: #fff;
+	font-weight:bold;
+	text-align:center;
+}
+.production_summary {
+	background-color:#CCCC33;
+	color: #000;
+	text-align:center;
+	font-weight:bold;
+}
+.production_phase {
+	background-color: #C9CDAA; /*#FFCC33*/
+	color: #000;
+	text-align:center;
+	font-weight:bold;
+}
+.production_leaf0 {
+	background-color: #FFFFFF;
+	color: #000;
+	text-align:center;
+}
+.production_leaf1 {
+	background-color: #FFFFFF; /* Turquoise = #DFDFFF*/
+	color: #000;
+	text-align:center;
+}
+.production_note {
+	font-size: x-small;
+	font-weight: normal;
+}
+.picture_small, .picture_small a:link{	
+	width:14em;
+	height:12em;
+	vertical-align:middle;
+	border-style:inset;
+	border-color:#000;
+	border-width:0;
+	padding-top:0;
+	padding-bottom:0;
+	padding-left:0;
+	padding-right:0;
+}
+.picture_caption{
+	font-size:x-small;
+}
+/*
+.upper_left_logo {
+	width:19.3em;
+	height:5.5em;
+	vertical-align:top;
+	padding-top:1;
+	padding-bottom:1;
+	padding-left:1;
+	padding-right:1;
+}
+*/
+.audit_trail_milestone0 {
+	background-color:#CCCC33;
+	color: #000;
+	text-align:left;	
+}
+.audit_trail_milestone1 {
+	/*background-color: #669900;*/
+	background-color:#CCCC33;
+	color: #000;
+	text-align:left;	
+}
+.audit_trail_production_step0 {
+	background-color: #FFCC33;
+	color: #000;
+	text-align:left;	
+}
+.audit_trail_production_step1 {
+	background-color:#FFCC33;
+	color: #000;
+	text-align:left;	
+}
+.search_results_container{
+	background:#D4D0C8;
+	border-bottom:1px solid #000;
+	border-left:1px solid #000;
+	border-right:1px solid #000;
+	border-top:1px solid #000;		
+}
+.popup{
+	background-color:#D4D0C8;
+	background-repeat:repeat;
+	border-color:#000000;
+	border-width:2em;
+}
+.body_popup{
+	background-color:#D4D0C8;
+	background-repeat:repeat;
+	border-color:#000000;
+	border-width:2em;
+	margin:1em 1em 1em 1em;
+}
+.dashboard_table{
+	background:#ccc;
+}
+.error_block{
+	display:block;
+	background-color: #D4D0C8;
+	/*background-color:#CCC;*/
+	color:#CC3333;
+	font-weight:bold;
+	font-style:normal;
+	font-size:1em;
+	border-bottom:0.1em solid #000;
+	border-left:0.1em solid #000;
+	border-right:0.1em solid #000;
+	border-top:0.1em solid #000;
+ 	padding:0.1em 0.2em 0.1em 0.2em;
+}
+.error {
+	color: #C33;
+	font-style:italic;
+	font-size:small;
+}
+
+.info_block{
+	text-align:center;
+	background-color:#996;
+	color:#000;
+	font-weight:600;
+	font-style:normal;
+	font-size:1em;
+	border-bottom:0.1em solid #000;
+	border-left:0.1em solid #000;
+	border-right:0.1em solid #000;
+	border-top:0.1em solid #000;
+	padding:0.1em 0.2em 0.1em 0.2em;
+}
+.total_amount {
+	font-weight:bold;
+	color:#000;
+}
+.total_amount_financials {
+	font-weight:bold;
+	color:#000;
+	background-color:#996;
+}
+.contact_select_div{
+	border: 0.1em; 
+	overflow: auto; 
+	width: 100%; 
+	height: 11.5em;
+}
+.milestones_select_div{
+	border: 0.1em; 
+	overflow: auto; 
+	width: 100%; 
+	height: 9.5em;
+}
+.b2s_payments_div {
+	border: 0.1em; 
+	overflow: auto; 
+	width: 100%; 
+	height: 200px;
+}
+.footnote {
+	font-size: x-small;
+	color: #000;
+	text-align:left;
+}
+.calendar_button {
+	cursor: pointer; 
+	border: 0.1em solid #000;
+	vertical-align:text-bottom;
+}

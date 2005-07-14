@@ -1,0 +1,91 @@
+/**
+* Copyright OpenCraft |  http://www.open-craft.com
+* ------------------------------------------------------------------
+*
+* Contrack Order Management System
+*
+* Details and latest version at:
+* http://contrack.sourceforge.net
+*
+* $Id: $
+*
+* This software is distributed under the GNU General Public License.
+* Read the entire license text here: http://www.gnu.org/licenses/gpl.html
+*/
+
+/****************************************************************************
+	Menu CSS file
+****************************************************************************/
+#nav, #nav ul {
+	float: left;
+	width: 34.3em;
+	list-style: none;
+	line-height: 1;
+	background: #CCC;
+	font-weight: bold;
+	padding: 0;
+	border-width: 0.1em;
+	border-style: solid;
+	border-color:#AAA;
+	margin: 0 0 1em 0;
+}
+
+#nav a {
+	display: block;
+	width: 11em;
+	w\idth:6.6em;
+	color: #000;
+	text-decoration: none;
+	padding: 0.25em 0.75em;
+}
+/*
+#nav a.daddy {
+	background: url(rightarrow.gif) center right no-repeat;
+}
+*/
+#nav li {
+	float: left;
+	padding: 0;
+	width: 11.4em;
+}
+#nav li ul {
+	position: absolute;
+	left: -999em;
+	height: auto;
+	width: 15.4em;
+	w\idth: 14.8em;
+	font-weight: normal;
+	border-width: 0.125em;
+	border-style:solid;
+	border-color:#999;
+	margin: 0;
+}
+
+#nav li li {
+	padding-right: 1em;
+	width: 13.9em;
+	margin-left:-0.1em;
+}
+
+#nav li ul a {
+	width: 18.2em;
+	w\idth: 13em;
+	padding-left:1em;
+}
+#nav li ul ul { /* level 2 menu*/
+	margin: -1.75em 0 0 13.5em;
+}
+
+/* hide level 2 menu when hovering on the top li*/
+#nav li:hover ul ul, #nav li:hover ul ul ul, #nav li.sfhover ul ul, #nav li.sfhover ul ul ul {
+	left: -999em;
+}
+
+/* show level 2 menu when hovering on the sub li*/
+#nav li:hover ul, #nav li li:hover ul, #nav li li li:hover ul, #nav li.sfhover ul, #nav li li.sfhover ul, #nav li li li.sfhover ul {
+	left: auto;
+}
+
+#nav li:hover, #nav li.sfhover {
+	background: #999;
+}

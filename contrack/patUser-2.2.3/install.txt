@@ -1,0 +1,98 @@
+patUser Installation
+====================
+
+CAUTION! 
+patUser <= version 2.1.x are based on patDbc. Now patDbc is obsolete
+- see http://www.php-tools.de/site.php?file=misc/patDbc.xml for details.
+Further releases of patUser - version 2.2.0 and above - are based on PEAR::DB
+which allows to access different types of datasources (MySQL, Postgres, ...)
+Therefore currently all pat-classes switch to PEAR::DB. 
+
+Release notes:
+==============
+Version 2.2.2 BETA:
+- Added better security when using "crypt" encryption. 
+- Added "mode" to requireAuthentication() - patUser now supports callback-objects to handle login
+- removed some notices
+- review of modifyUser() and fixed "username/password requirede"-bugs - hopefully!
+
+Thanks to:
+- Paul Baranowski <paul@paulbaranowski.org> who sends us a completely rewritten version of patUser 
+  that implements lots of additional features and improvements. This version of patUser implements two of them 
+  (improved crypt-function, callback for authentication).
+- Gregor Gramlich <gramlich@eosc.de> for testing, reporting bugs and solutions.
+- and YOU, for download, usage, test, bugreports, support, ...
+
+Version 2.2.1:
+- most changes were made to improve the download package
+- minor bugfixes and removed notices
+
+Version 2.2.0:
+- derived from 2.1.1
+- all functions changed to use work with PEAR:DB
+- removed lots of warnings and notices
+- patUser also works without "permissions" (uses only "groups" and "users")
+- getPermissions() now can return a permission list of all users/groups
+
+Installation:
+=============
+Installing these example are quite easy.
+
+- Setup your Database
+  patUsers stores all data in tables of your database. Use the SQL-dumps to setup the needed tables.
+  
+  This package provides two sets of SQL-dumps.
+  
+  1) sql/simple.sql
+  This SQL-dump contains a very basic setup for patUser. It includes table definitions for "users", "groups", "permissions" and "usergroups"
+  and four users: "gerd" (password: "gerd123"), "tom", "heiko" and "mathias" (Guess what the passwords are :-)).
+  
+  I suggest to use this "simple" setup for your first steps with patUser.
+  
+  2) sql/complex_*.sql
+  There are some SQL-dumps named complex_base.sql, complex_users.sql and so on. Even if they are called "complex" 
+  they are not really complicated. They are just dumps whose may come close to a real-live application. 
+  The file complex_base.sql contains the basic table definitions, the oter files can be used for inserting
+  data into you tables. I split the dump to ease playing with different data in your tables.
+  
+  Use any DB-Client (like "mysql" or "phpMyAdmin") to import the SQL-dump.
+  
+  Notes about SQL-Dumps:
+  The SQL-dumps work fine in my case - but maybe you need to adjust the SQL-files if you use a different
+  version of MySQL. If you have any suggestions to improve the SQL-dumps: please contact us/me!
+  Please also notice, that I've never tested the dumps on other databases (like Postgres, etc). Furthermore I don't
+  plan to test these dumps on any other database than the one I use. (I don't want to spend time for that.)
+  On the other hand, if you send me fixed SQL-dumps I'll include them in the package. 
+
+  
+- copy files
+  Copy the complete directory patUser into your web-root. 
+
+- configure your installation of patUser
+  patUser needs access to you database - of course. Therefore you have to setup your database-connection
+  
+  1) use exmaple.php and example2.php
+  Open "prepend.php" and change $dsn to you needs. E.g.: mysql://pat:pat123@localhost/pat
+  (see the documentation of PEAR:DB on http://pear.php.net)
+  
+  2) use example_patConfiguration.php 
+  Open the xml-config-file: "conf/user.xml" and change the 
+  values of the "userdsn"-tag e.g. mysql://pat:pat123@localhost/pat
+   
+- Start the example
+  Start your web-browser and start the example:
+  
+  example.php - the basic example which is recommended
+  
+  example_patConfiguration.php - an example that shows how patUser can be configured with patConfiguration
+  (This is just for advanced usage of patUsers)
+  
+  example_getPermissions.php - this example tests the improved features of the getPermission-method
+  (Please notice, that you need some permissions in your database in order to fetch them!)
+  
+- start coding
+  Load the example-files into your favourit editor and use patUser within your own projects.
+  
+
+Hav fun, gERD
+Viel Spass am Gerät, gERD

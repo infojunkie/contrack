@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<!-- definesUser.xml -->
+<dummy>
+	<!-- userconfig -->
+	<define type="array" tag="userconfig" />
+	<define type="string" tag="userauthtable" name="authtable" />
+	<define type="array" tag="userauthfields" name="authfields" />
+	<define type="string" tag="usergrouptable" name="grouptable" />
+	<define type="array" tag="usergroupfields" name="groupfields" />
+	<define type="string" tag="usergroupreltable" name="groupreltable" />
+	<define type="array" tag="usergrouprelfields" name="grouprelfields" />
+	<define type="string" tag="userpermtable" name="permtable" />
+	<define type="array" tag="userpermfields" name="permfields" />
+	<define type="array" tag="userstatistics" name="statistics" />
+	
+	<define type="string" tag="userdsn" name="dsn"/>
+	<define type="string" tag="userfield" name="_attribute" attribute="name" />
+	<!-- /useronfig -->
+</dummy>
+<!-- eof --> 

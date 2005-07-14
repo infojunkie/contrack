@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<configuration>
+	<xinc href="definesUser.xml" />
+
+	<userconfig>
+		<userdsn>mysql://pat:pat123@localhost/pat</userdsn>
+		<userauthtable>user</userauthtable>
+		<userauthfields>
+			<userfield name="primary">uid</userfield>
+			<userfield name="username">username</userfield>
+			<userfield name="passwd">passwd</userfield>
+			<userfield name="nologin">nologin</userfield>
+			<userfield name="forename">forename</userfield>
+			<userfield name="surname">surname</userfield>
+			<userfield name="email">email</userfield>
+		</userauthfields>
+		<usergrouptable>groups</usergrouptable>
+		<usergroupfields>
+			<userfield name="primary">gid</userfield>
+			<userfield name="name">name</userfield>
+		</usergroupfields>
+		<usergroupreltable>user_rel_group</usergroupreltable>
+		<usergrouprelfields>
+			<userfield name="gid">gid</userfield>
+			<userfield name="uid">uid</userfield>
+		</usergrouprelfields>
+		<userpermtable>permissions</userpermtable>
+		<userpermfields>
+			<userfield name="id">id</userfield>
+			<userfield name="id_type">id_type</userfield>
+			<userfield name="perms">perms</userfield>
+			<userfield name="application">application</userfield>
+			<userfield name="part">part</userfield>
+			<userfield name="detail">detail</userfield>
+		</userpermfields>
+		<userstatistics>
+			<userfield name="first_login">first_login</userfield>
+			<userfield name="last_login">last_login</userfield>
+			<userfield name="count_logins">count_logins</userfield>
+			<userfield name="count_pages">count_pages</userfield>
+			<userfield name="time_online">time_online</userfield>
+		</userstatistics>
+	</userconfig>
+		
+</configuration>
