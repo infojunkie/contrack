@@ -352,7 +352,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	*	name of the sequence for user ids
 	*	@var	string	$userIdSequence
 	*/
-	var	$sessionVar		=	"patUserSequence";
+	var	$userIdSequence		=	"patUserSequence";
 
    /**
 	*	variable to store the patTemplate object (false if no template is used)

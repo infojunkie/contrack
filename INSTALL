@@ -20,7 +20,7 @@ You can obtain the latest Contrack release from:
 http://www.sourceforge.net/projects/contrack
 
 Copy the tar.gz file into a working directory
-e.g. $ cp contrack-0.5.tar.bz2 /tmp/contrack
+e.g. $ cp contrack-0.5.1.tar.bz2 /tmp/contrack
 
 Change to the working directory
 e.g. $ cd /tmp/contrack
@@ -72,7 +72,7 @@ In your MySQL administrator run the sql script named 'contrack.sql' located unde
 
 4. Configure Contrack
 
-- Open 'contrack/conf/contrack_config.php 'and edit the database connection string to reflect the db name, user name, and password you just created.
+- Open 'contrack/conf/configuration.php 'and edit the database connection string to reflect the db name, user name, and password you just created.
 - Open 'contrack/patUser-2.2.3/prepend.php' and edit the $dsn variable to reflect the changes you made:
 e.g. $dsn = "mysql://username:password@localhost/contrack";
 
