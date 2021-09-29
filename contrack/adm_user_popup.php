@@ -226,10 +226,10 @@ function validate_form()
 		$errors['PASSWORD_CHECK'] = "Passwords did not match. Please try again.";
 	}
 
-	if (count($errors) > 0)	{
+	if (safe_count($errors) > 0)	{
 		$errors['error'] = "Invalid values";
 	}
-	return count($errors) == 0;
+	return safe_count($errors) == 0;
 }
 
 /****************************************

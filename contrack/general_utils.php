@@ -1515,4 +1515,14 @@ function do_sort(&$sort_by, &$prior_sort_by, &$sort_order, &$glb_arr_sort_indica
 		$glb_arr_sort_indicators[$sort_by] = '<img src="images/up.gif" alt="Ascending order"/>';
 	}
 }
+
+/*
+	Version of safe_count() that does not break PHP 8.0
+	https://stackoverflow.com/a/67971911/209184
+*/
+function safe_safe_count($var) {
+	if (is_countable($var)) return safe_count($var);
+	return 0;
+}
+
 ?>

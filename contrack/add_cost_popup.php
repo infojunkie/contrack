@@ -1,4 +1,4 @@
-	
+
 <?php
 /**
 * Copyright OpenCraft |  http://www.open-craft.com
@@ -22,7 +22,7 @@
   	Additional Costs popup page
 
 	This page will handle editing/creating new additional costs for single and general orders
-	It has three states: NEW, EDIT, and PROCESS. The latter is a transient state	
+	It has three states: NEW, EDIT, and PROCESS. The latter is a transient state
 ******************************************************************************************/
 require_once ("db_utils.php");
 require_once ("general_utils.php");
@@ -37,7 +37,7 @@ process_state();
 	Page Initialisation
 	- Authenticate
 	- Get all parameters passed to the page
-	- Check for any errors passed to the page	
+	- Check for any errors passed to the page
 ****************************************************/
 function init_page() {
 	global $user;
@@ -83,7 +83,7 @@ function process_state() {
 	}
 }
 
-/**************************************** 
+/****************************************
 	Root functions
 *****************************************/
 function new_form() {
@@ -96,21 +96,21 @@ function edit_form() {
 }
 
 /*
-	
+
 	Function: process_form()
-	Desc:  
+	Desc:
 		This function is called upon submission of the form.
 		Validates values posted.
 		Checks whether this is a NEW state or an EDIT state and acts accordingly.
- 	Params: 
+ 	Params:
     	None
-   	Returns: 
+   	Returns:
 		Nothing
 */
 function process_form() {
 	global $glb_arr_values, $state, $add_cost_id, $order_id, $order_type;
 
-	// Get values from submitted form	
+	// Get values from submitted form
 	post_values();
 
 	if (validate_form()) {
@@ -130,7 +130,7 @@ function process_form() {
 			$state = state_CLOSEPOPUP;
 		}
 	} else { // validation unsuccessful
-		if (-1 != $glb_arr_values['ADDITIONAL_COST_ID']) { // Go back to EDIT state			
+		if (-1 != $glb_arr_values['ADDITIONAL_COST_ID']) { // Go back to EDIT state
 			$state = state_EDIT;
 		} else { // Go back to NEW state
 			$state = state_NEW;
@@ -145,7 +145,7 @@ function init_form() {
 
 	if ($state != state_NEW) { //VIEW
 		$glb_arr_values['ADDITIONAL_COST_ID'] = $add_cost_id;
-	} else { //NEW		
+	} else { //NEW
 		new_values();
 	}
 }
@@ -181,12 +181,12 @@ function post_values() {
 
 /*
 	Function: get_record()
-	Desc:  
+	Desc:
 		If add_cost_id < 1 then this is a new record. Populate with defaults.
 		If add_cost_id > 1 get record from database and populate values global array
- 	Params: 
+ 	Params:
     	None
-   	Returns: 
+   	Returns:
 		Nothing
 */
 function get_record() {
@@ -225,13 +225,13 @@ function validate_form() {
 
 	// URL Check
 
-	if (count($errors) > 0) {
+	if (safe_count($errors) > 0) {
 		$errors['error'] = "There was a problem with the information entered. Please review the form and make necessary corrections.";
 	}
-	return count($errors) == 0;
+	return safe_count($errors) == 0;
 }
 
-/**************************************** 
+/****************************************
 	SQL Generation functions
 *****************************************/
 /*
@@ -240,8 +240,8 @@ function validate_form() {
 function generate_select_add_cost_sql() {
 	global $glb_arr_values;
 
-	$select_sql = "	SELECT * 
-						FROM additional_cost 
+	$select_sql = "	SELECT *
+						FROM additional_cost
 						WHERE ADDITIONAL_COST_ID =".$glb_arr_values['ADDITIONAL_COST_ID'];
 	return $select_sql;
 }
@@ -252,9 +252,9 @@ function generate_select_add_cost_sql() {
 function generate_insert_add_cost_sql() {
 	global $glb_arr_values, $order_type;
 
-	$insert_sql = "INSERT INTO additional_cost 
+	$insert_sql = "INSERT INTO additional_cost
 						(DESCRIPTION, AMOUNT, PAYOR_ID, PAYEE_ID, GEN_ORDER_ID, SINGLE_ORDER_ID, BELONGS_TO)
-						VALUES(		
+						VALUES(
 						'".mysql_encode($glb_arr_values['DESCRIPTION'])."',
 						".$glb_arr_values['AMOUNT'].",
 						".$glb_arr_values['PAYOR_ID'].",
@@ -272,7 +272,7 @@ function generate_insert_add_cost_sql() {
 function generate_update_add_cost_sql() {
 	global $glb_arr_values, $order_type;
 
-	$update_sql = "UPDATE additional_cost SET																
+	$update_sql = "UPDATE additional_cost SET
 						DESCRIPTION 	= '".mysql_encode($glb_arr_values['DESCRIPTION'])."',
 						AMOUNT 			= ".$glb_arr_values['AMOUNT'].",
 						PAYOR_ID 		= ".$glb_arr_values['PAYOR_ID'].",
@@ -326,15 +326,15 @@ function addCost()
 	if (!validateNumeric('Amount',frm.AMOUNT.value)) return;
 
 	// All tests passed
-	frm.state.value	= statePROCESS ;		
-	frm.submit();	
+	frm.state.value	= statePROCESS ;
+	frm.submit();
 }
 --></script>
 <body class="body_popup">
 <?= generate_form_header(); ?>
 <table class="popup" border="0">
 	<tr><h4>Add/Edit Additional Cost</h4></tr>
-	
+
 	<tr><td>Description:</td>
 	<td>
 	<?=	generate_text_input ("formtext_longwidth", "DESCRIPTION", $glb_arr_values['DESCRIPTION']);?>
@@ -345,29 +345,28 @@ function addCost()
 	<td>
 	<?=	generate_dd_add_cost_payor_input ($glb_arr_values['PAYOR_ID'], $order_id, $order_type);?>
 	</td></tr>
-	
+
 	<tr><td>Payee:<?= generate_required_superscript();?></td>
 	<td>
 	<?=	generate_dd_add_cost_payee_input ($glb_arr_values['PAYEE_ID'], $order_id, $order_type);?>
 	</td></tr>
-	
+
 	<tr><td>Amount:<?= generate_required_superscript();?></td>
 	<td>
-	<?=	
-		generate_text_input ("formtext_stdwidth", "AMOUNT", $glb_arr_values['AMOUNT']).$currency;	
+	<?=
+		generate_text_input ("formtext_stdwidth", "AMOUNT", $glb_arr_values['AMOUNT']).$currency;
 	?>
 	</td></tr>
-		
+
 	<tr><td colspan="2" align="right">
 	<?php
 
 echo generate_button("button", "Save & Close", "addCost();");
 echo "&nbsp;";
 echo generate_button("button", "Cancel", "javascript:void window.close();");
-?>		  
+?>
 	</td></tr>
 </table>
 </form>
 </body>
 </html>
-
