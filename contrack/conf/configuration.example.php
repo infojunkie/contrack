@@ -20,11 +20,11 @@
 	System-wide configuration parameters
 */
 
-// DB connection parameters. 
-$hostname_contrack = "yourhostname";
+// DB connection parameters.
+$hostname_contrack = "db";
 $database_contrack = "contrack";
-$username_contrack = "username";
-$password_contrack = "password";
+$username_contrack = "contrack";
+$password_contrack = "contrack";
 
 // Company profile party_id. This should by synched up with party table in DB
 define ("COMPANY_PARTY_ID", 1);

@@ -1,6 +1,6 @@
 <?PHP
 /**
- *	patUser.php 
+ *	patUser.php
  *
  *	@author	Stephan Schmidt <schst@php-tools.net>
  *	@author	gERD Schaufelberger <gerd@php-tools.net>
@@ -10,16 +10,16 @@
  *	$Log: patUser.php,v $
  *	Revision 1.2  2005/03/30 18:29:04  amardini
  *	SF RC 1
- *	
+ *
  *	Revision 1.1.1.1  2004/12/12 15:19:05  kratib
  *	Initial check-in
- *	
+ *
  *	Revision 1.2  2004/10/01 19:12:21  Guest
  *	no message
- *	
+ *
  *	Revision 1.1  2004/07/27 07:39:26  Guest
  *	no message
- *	
+ *
  */
 
 /**
@@ -155,8 +155,8 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 /**
  *	user management class
  *
- *	patUser is a user management class, that helps you with authentication, groups 
- *	and permission. Furthermore it is useful to manage data (stored databases) 
+ *	patUser is a user management class, that helps you with authentication, groups
+ *	and permission. Furthermore it is useful to manage data (stored databases)
  *	related to users and groups. Also patUser provides user statistics.
  *
  *	CAUTION: This version is based on PEAR:DB
@@ -310,7 +310,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 									2			=>	"delete",
 									4			=>	"modify",
 									8			=>	"add" );
-*/									
+*/
 	// contrack set of permissions  -- Mardini 31/7/2004
 	var	$perms			=	array(	1			=>	"View_All",
 									2			=>	"View_Own",
@@ -363,8 +363,8 @@ define( "patUSER_NO_DB_RESULT", 2000 );
    /**
 	*	authentication handler object (false if no handler is used)
 	*
-	*	The authentication handler object will be used by {@see requireAuthentication()} 
-	*	to recieve data used for authentication. Therefore the handler-object must implment 
+	*	The authentication handler object will be used by {@see requireAuthentication()}
+	*	to recieve data used for authentication. Therefore the handler-object must implment
 	*	a method called: patUserGetAuthData().
 	*
 	*	Moreover patUser supports other optional methods of the auth handler object:
@@ -388,13 +388,13 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	*	@var	string	$loginTemplate
 	*/
 	var	$loginTemplate	=	"patUserLogin.tmpl";
-	
+
    /**
 	*	filename of the template used for unauthorized users
 	*	@var	string	$unauthorizedTemplate
 	*/
 	var	$unauthorizedTemplate	=	"patUserUnauthorized.tmpl";
-	
+
    /**
 	*	URL to redirect unauthorized users to
 	*	@var	string	$unauthorizedURL
@@ -428,7 +428,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
    /**
 	*	whether user stats have been updated.
 	*	@var	string	$statsUpdated
-	*/	
+	*/
 	var $statsUpdated	=	false;
 
    /**
@@ -436,7 +436,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	*	@var	string	$cryptFunction
 	*/
 	var	$cryptFunction	=	false;
-	
+
    /**
     *	create new user object
 	*
@@ -452,7 +452,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		$this->__construct( $useSessions, $sessionVar, $userIdSequence );
 	}
-	
+
    /**
 	*	create new user object
 	*
@@ -499,7 +499,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			}
 		}
 	}
-	
+
    /**
 	*	set authentication realm
 	*
@@ -537,7 +537,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	*	set dsn that contains authentication information
 	*
 	*	This method is DEPRECATED use setAuthDbc() instead.
-	*	The dsn describes the database connection which will be used to recieve the 
+	*	The dsn describes the database connection which will be used to recieve the
 	*	authentication date. The dsn will be used by PEAR::DB
 	*
 	*	@access	public
@@ -561,7 +561,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
    /**
 	*	set dbc that contains auth info
 	*
-	*	Set the database (PEAR:DB) object that will be used to gain access to the 
+	*	Set the database (PEAR:DB) object that will be used to gain access to the
 	*	authentication data
 	*
 	*	@access	public
@@ -590,7 +590,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		{
 			return	$this->authDbc;
 		}
-		
+
 		return true;
 	}
 
@@ -601,7 +601,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	*
 	*	@access	public
 	*	@param	string	$table	name of the table that contains auth data
-	*	@see	setAuthFields(), $authTable 
+	*	@see	setAuthFields(), $authTable
 	*/
 	function	setAuthTable( $table )
 	{
@@ -622,8 +622,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		if( !is_array( $fields ) )
 			return	false;
 
-		reset( $fields );
-		while( list( $key, $value ) = each( $fields ) )
+		foreach( $fields as $key => $value )
 			$this->authFields[$key]	=	$value;
 	}
 
@@ -639,7 +638,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		return $this->authFields;
 	}
 
-	
+
    /**
 	*	set tablename that contains group info
 	*
@@ -668,8 +667,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		if( !is_array( $fields ) )
 			return	false;
 
-		reset( $fields );
-		while( list( $key, $value ) = each( $fields ) )
+		foreach( $fields as $key => $value )
 			$this->groupFields[$key]	=	$value;
 	}
 
@@ -715,8 +713,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		if( !is_array( $fields ) )
 			return	false;
 
-		reset( $fields );
-		while( list( $key, $value ) = each( $fields ) )
+		foreach( $fields as $key => $value )
 			$this->groupRelFields[$key]	=	$value;
 	}
 
@@ -747,7 +744,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		return $this->permTable;
 	}
 
-	
+
    /**
 	*	set fieldnames that are used in the permissions
 	*
@@ -760,20 +757,19 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	function	setPermFields( $fields  )
 	{
 		$this->usePermissions	=	true;
-		
+
 		if( !is_array( $fields ) )
 			return	false;
 
-		reset( $fields );
-		while( list( $key, $value ) = each( $fields ) )
+		foreach( $fields as $key => $value )
 			$this->permFields[$key]	=	$value;
 	}
 
    /**
 	*	set authentication handler object
 	*
-	*	the authentication handler supplies patUser with authentication data and handles 
-	*	logins (failed and succeded). This allows patUser to work without http-auth or patTemplate. 
+	*	the authentication handler supplies patUser with authentication data and handles
+	*	logins (failed and succeded). This allows patUser to work without http-auth or patTemplate.
 	*
 	*	The authHandler must implement at least one method: patUserGetAuthData.
 	*	This method will be called if the authentication data is needed. Optional patUser
@@ -827,7 +823,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		$this->stats[$statistic]	=	$field;
 	}
-	
+
    /**
 	*	set the location of a field
 	*
@@ -858,13 +854,13 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		$this->cryptFunction	=	$cryptFunction;
 		return	true;
 	}
-	
+
    /**
 	*	authenticate a user
 	*
-	*	This method is used to log in. This method uses the $data-parameter and tries to 
-	*	find a matching user. Furthermore it checks if the user is allowed to login (uses 
-	*	the "nologin" field in the auth-table). Is the user was logged in successfully, the 
+	*	This method is used to log in. This method uses the $data-parameter and tries to
+	*	find a matching user. Furthermore it checks if the user is allowed to login (uses
+	*	the "nologin" field in the auth-table). Is the user was logged in successfully, the
 	*	statistics will be updated (if the statistic-function is enabled).
 	*
 	*	@access	public
@@ -897,7 +893,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			{
 				$this->storeSessionValue( $this->stats["current_login"], time() );
 			}
-			
+
 			//	Update statistics
 			if( isset( $this->stats["last_login"] ) || isset( $this->stats["count_logins"] ) )
 			{
@@ -922,7 +918,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
    /**
 	*	check, whether a user is already authenticated
 	*
-	*	if auth is done via session, all important vars will be fetched. 
+	*	if auth is done via session, all important vars will be fetched.
 	*
 	*	@access	public
 	*	@return	bool	$success	treu, if user is authenticed, false otherwise
@@ -944,7 +940,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				return	true;
 			}
 		}
-		return	false;		
+		return	false;
 	}
 
    /**
@@ -998,27 +994,27 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		{
 			$this->storeSessionValue( "patAuthenticated", false );
 			$this->clearSessionValue( "patUid" );
-						
+
 			if( isset( $this->stats["current_login"] ) )
 				$this->clearSessionValue( $this->stats["current_login"] );
 		}
 	}
-	
+
    /**
 	*	require	an authenticated user
 	*
 	*	Use this function, if you want to be sure, that a user is logged in. If there is no user
-	*	yet, this method tries to get the authendication data (usually username and password). This 
-	*	can be controlled by the "mode"-parameter. 
+	*	yet, this method tries to get the authendication data (usually username and password). This
+	*	can be controlled by the "mode"-parameter.
 	*	Set mode to:
 	*	- "displayLogin": use patTemplate to display a login screen and search the POST-variables for
 	*	  username and password. If there is no user, the programme will exit. This si the default mode.
-	*	- "exit": This very simple mode just exits the script, if no user is logged in. 
+	*	- "exit": This very simple mode just exits the script, if no user is logged in.
 	*	- "callAuthHandler": In this case patUser sets the realm in the authHandler object and asks for the
-	*	  authentication data to login user. If the user could authenticated, patUser sets the uid in the 
-	*	  authHandler, otherwise it sends the errors to the authHandler. If user was already authenticated, 
+	*	  authentication data to login user. If the user could authenticated, patUser sets the uid in the
+	*	  authHandler, otherwise it sends the errors to the authHandler. If user was already authenticated,
 	*	  patUser just sends the uid to the authHandler.
-	*	
+	*
 	*
 	*	@access	public
 	*	@param	string	$mode			what should be done if user is not authenticated (displayLogin|callAuthHandler|exit)
@@ -1031,13 +1027,13 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		if( $this->isAuthenticated() )
 		{
 			$uid	=	$this->getUid();
-			
+
 			// inform the authentication handler about the logged in user
 			if( is_object( $this->authHandler ) && method_exists( $this->authHandler, "patUserSetUid" ) )
 			{
 				$this->authHandler->patUserSetUid( $uid );
 			}
-			
+
 			return $uid;
 		}
 
@@ -1045,7 +1041,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		{
 			case	"displaylogin":
 				$displayForm	=	false;
-				
+
 				//	get authentication data
 				if( $this->useTemplate )
 					$authData		=	$this->getAuthVars( "post" );
@@ -1058,10 +1054,10 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 					else
 						$authData		=	$this->getAuthVars( "http" );
 				}
-				
+
 				//	check, whether data is correct
-				if( isset( $authData[$this->authFields["username"]] ) 
-					|| isset(  $authData[$this->authFields["passwd"]] ) 
+				if( isset( $authData[$this->authFields["username"]] )
+					|| isset(  $authData[$this->authFields["passwd"]] )
 					|| isset(  $authData[$this->actionVar] ) )
 				{
 					if( strlen( $authData[$this->authFields["username"]] ) < 1 )
@@ -1079,10 +1075,10 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 						$data	=	array(	$this->authFields["username"]	=>	$authData[$this->authFields["username"]],
 											$this->authFields["passwd"]		=>	$authData[$this->authFields["passwd"]] );
 						$uid	=	$this->authenticate( $data );
-	
+
 						if( !is_int( $uid ) )
-						{				
-							$displayForm	=	true;		
+						{
+							$displayForm	=	true;
 						}
 						else
 						{
@@ -1092,9 +1088,9 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 					}
 				}
 				else
-					$displayForm		=	true;	
-				
-	
+					$displayForm		=	true;
+
+
 				//	check, whether form should be displayed
 				if( $displayForm )
 				{
@@ -1111,7 +1107,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 								header( "Location:".$this->unauthorizedURL );
 								exit;
 							}
-							
+
 							if( $this->useTemplate )
 							{
 								$this->tmpl->readTemplatesFromFile( $this->unauthorizedTemplate );
@@ -1126,7 +1122,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 					$loginAttempts++;
 					$this->storeSessionValue( "_patUserLoginAttempts", $loginAttempts );
-					
+
 					if( $this->useTemplate )
 					{
 						$form_data						=	$this->authFields;
@@ -1134,21 +1130,21 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 							$form_data["username_value"]	=	$authData[ $form_data["username"] ];
 						else
 							$form_data["username_value"]	=	"";
-						
+
 						if( isset( $authData[ $form_data["passwd"] ] ) )
 							$form_data["passwd_value"]		=	$authData[ $form_data["passwd"] ];
 						else
 							$form_data["passwd_value"]		=	"";
 
-	
+
 						$this->tmpl->readTemplatesFromFile( $this->loginTemplate );
 						$this->tmpl->addGlobalVars( $form_data, "PATUSER_" );
 						$this->tmpl->addGlobalVar( "PATUSER_ACTION", $this->actionVar );
 						$this->tmpl->addGlobalVar( "PATUSER_SELF", $this->getSelfUrl() );
 						$this->tmpl->addGlobalVar( "PATUSER_REALM", $this->realm );
 						$this->tmpl->addGlobalVar( "PATUSER_LOGINATTEMPTS", ($loginAttempts-1) );
-						
-	
+
+
 						if( $displayOnError )
 						{
 							$errors	=	$this->getAllErrors();
@@ -1157,12 +1153,12 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 								$this->tmpl->setAttribute( "errorlist", "visibility", "visible" );
 								$this->tmpl->addRows( "error", $errors, "ERROR_" );
 							}
-							
+
 							if( $this->tmpl->exists( "patUserLogin" ) )
 								$this->tmpl->displayParsedTemplate( "patUserLogin" );
 							else
 								$this->tmpl->displayParsedTemplate();
-			
+
 							exit;
 						}
 					}
@@ -1175,30 +1171,30 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 					return	false;
 				}
 				break;
-				
+
 			case	"callauthhandler":
 				if( !is_object( $this->authHandler ) )
 				{
 					die( "patUser fatal error: called requireAuthentication without callback-object; use setAuthHandler()" );
 				}
-				
+
 				// realm
 				if( method_exists( $this->authHandler, "patUserSetRealm" ) )
 				{
 					$this->authHandler->patUserSetRealm( $this->realm );
 				}
-				
+
 				// get authentication data
 				$authData	=	$this->authHandler->patUserGetAuthData();
 				$uid		=	$this->authenticate( $authData );
-				
-								
+
+
 				if( $uid )
 				{
 					// report uid to auth handler
 					if( method_exists( $this->authHandler, "patUserSetUid" ) )
 						$this->authHandler->patUserSetUid( $uid );
-						
+
 					return $uid;
 				}
 				else
@@ -1206,12 +1202,12 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 					// report errors to auth handler
 					if( method_exists( $this->authHandler, "patUserSetErrors" ) )
 						$this->authHandler->patUserSetErrors( $this->getAllErrors() );
-						
+
 					return false;
 				}
 				break;
-			
-			
+
+
 			// case exit
 			default:
 				exit;
@@ -1231,7 +1227,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		Header( "HTTP/1.0 401 Unauthorized" );
 		exit;
 	}
-	
+
    /**
 	*	import needed variables from request
 	*
@@ -1256,7 +1252,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 					global	$HTTP_SERVER_VARS;
 					$authVars[$this->authFields["username"]]	=	$HTTP_SERVER_VARS["PHP_AUTH_USER"];
 					$authVars[$this->authFields["passwd"]]		=	$HTTP_SERVER_VARS["PHP_AUTH_PW"];
-				
+
 				}
 				break;
 
@@ -1264,9 +1260,9 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			default:
 				$varNames	=	array_values( $this->authFields );
 				array_push( $varNames, $this->actionVar );
-		
+
 				reset( $varNames );
-		
+
 				//	check for PHP version
 				if( $this->getPHPVersion() >= 4.1 )
 				{
@@ -1293,7 +1289,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		}
 		return	$authVars;
 	}
-	
+
   /**
 	*	force log out of an authenticated user
 	*
@@ -1304,7 +1300,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !$this->isAuthenticated() )
 			return	true;
-			
+
 		$this->clearUid();
 
 		if( !$this->useTemplate )
@@ -1340,7 +1336,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !is_array( $authData ) )
 		{
-			$this->setError( patUSER_NO_DATA_GIVEN ); 
+			$this->setError( patUSER_NO_DATA_GIVEN );
 			return	false;
 		}
 
@@ -1365,10 +1361,10 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				$this->setError( patUSER_NEED_PASSWD );
 
 		$authData[$this->authFields["passwd"]]	=	$this->encryptPasswd( $authData[$this->authFields["passwd"]] );
-		
+
 		if( count( $this->getAllErrorCodes() ) )
 			return	false;
-			
+
 		//	check whether user already exists
 		if( $this->identifyUser( array( $this->authFields["username"] => $authData[$this->authFields["username"]] ) ) )
 		{
@@ -1377,10 +1373,10 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		}
 		else
 			$this->removeLastError();
-			
+
 		//	create query
 		$set	=	array();
-		while( list( $field, $value ) = each( $authData ) )
+		foreach( $authData as $field => $value )
 			if( in_array( $field, $this->authFields ) )
 				$set[]	=	$field."='".addslashes( $value )."'";
 
@@ -1392,20 +1388,20 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		$uid	=	$this->authDbc->nextId( $this->userIdSequence );
 
 		array_push( $set, $this->authFields["primary"] . "=" . $uid );
-		
+
 		$query	=	"INSERT INTO ".$this->authTable." SET ".implode( ",", $set );
 		//	insert data
 		$this->authDbc->query( $query );
-		
+
 		//	automatic login
 		if( $uid && $login )
 		{
 			$this->setUid( $uid );
 		}
-		
+
 		return	$uid;
 	}
-	
+
    /**
 	*	store a value in the session
 	*
@@ -1445,8 +1441,8 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		unset( $this->sessionData[$name] );
 		return	$val;
 	}
-	
-	
+
+
    /**
 	*	get a value that was stored in the session
 	*
@@ -1484,7 +1480,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		if( isset( $this->sessionData[$name] ) )
 			return	true;
-			
+
 		return	false;
 	}
 
@@ -1505,22 +1501,22 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			return	false;
 
 		$authData	=	$this->getAuthVars();
-			
+
 		//	login => page did not change
-		if( isset( $authData[$this->authFields["username"]] ) 
-			|| isset( $authData[$this->authFields["passwd"]] ) 
+		if( isset( $authData[$this->authFields["username"]] )
+			|| isset( $authData[$this->authFields["passwd"]] )
 			|| ( isset( $authData[$this->actionVar] ) && $authData[$this->actionVar] == "login" ) )
 			return	true;
-			
+
 		$history	=	$this->getSessionValue( "patUserHistory" );
-		
+
 		if( is_array( $history ) )
 		{
 			//	only reload?
 			$last		=	$history[( count($history) - 1 )]["url"];
 			$self		=	$this->getSelfUrl();
 			if( $last == $self )
-				return	true;	
+				return	true;
 
 			array_push( $history, array( "url" => $self, "title" => $title ) );
 			if( count( $history ) > $amount )
@@ -1533,7 +1529,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			$history	=	array( array( "url" => $this->getSelfUrl(), "title" => $title ) );
 
 		$this->storeSessionValue( "patUserHistory", $history );
-			
+
 		return	true;
 	}
 
@@ -1549,7 +1545,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		$tmp	=	$this->getSessionValue( "patUserHistory" );
 		if( !is_array( $tmp ) )
 			return	array();
-		
+
 		if( !$pages )
 			$pages	=	count( $tmp );
 
@@ -1562,7 +1558,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		return	$history;
 	}
-	
+
    /**
 	*	go back x pages in the history
 	*	as Header( "Location:..." ) is used, there must not be any output before this is called
@@ -1577,11 +1573,11 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			return	false;
 
 		$url	=	$history[( count( $history ) + $pages )]["url"];
-		
+
 		header( "Location:".$url );
 		exit;
 	}
-	
+
 
    /**
 	*	add a dsn or dbc-object
@@ -1609,7 +1605,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 			die( "patUser fatal error: The dsn must be either a PEAR::DB-object or a dsn-string" );
 		}
-	
+
 		// otherwise setup dbc
 		$this->dsns[$name]	=	$dsn;
 		$this->dbcs[$name]	=	DB::connect( $dsn, $persistent );
@@ -1618,7 +1614,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			return	$this->dbcs[$name];
 		}
 		return	true;
-	}	
+	}
 
    /**
 	*	add table that is used to store user data
@@ -1638,7 +1634,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !$tabledef["table"] )
 			$tabledef["table"]		=	$name;
-			
+
 		$this->tables[$name]		=	$tabledef;
 	}
 
@@ -1683,17 +1679,17 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		{
 			if( isset( $this->tables[$options["table"]]["table"] ) )
 				$table		= $this->tables[$options["table"]]["table"];
-			
-			if( isset( $this->tables[$options["table"]]["foreign"] ) ) 
+
+			if( isset( $this->tables[$options["table"]]["foreign"] ) )
 				$uidfield	=	$this->tables[$options["table"]]["foreign"];
 		}
 
 		unset( $options["uid"] );
 
 		$fields	=	$options;
-		if( isset( $options["fields"] ) ) 
+		if( isset( $options["fields"] ) )
 			$fields		= $options["fields"];
-	
+
 		$dbc			=	&$this->getDbc( $table );
 
 		unset( $fields["table"] );
@@ -1711,7 +1707,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			array_push( $newClause, array( "field" => $field, "value" => $value, "match" => "exact" ) );
 
 		$query			=	$this->buildSelectQuery( $table, $fields, $newClause, $options );
-		
+
 		//	query database
 		return 	$dbc->getAll( $query, array(), DB_FETCHMODE_ASSOC );
 	}
@@ -1730,9 +1726,9 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		$table	=	$this->authTable;
 		if( isset( $options["table"] ) && isset( $this->tables[$options["table"]]["table"] ) )
 			$table	=	$this->tables[$options["table"]]["table"];
-		
+
 		$query		=	$this->buildSelectQuery( $table, $fields, $clause, $options );
-		
+
 		//	get the dbc for the statement
 		$dbc		=&	$this->getDbc( $table );
 
@@ -1748,13 +1744,13 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	*/
 	function	identifyUser( $options )
 	{
-	
+
 		//	check if user id is given => no identification needed
 		if( isset( $options["uid"] ) )
 			return	$options["uid"];
 		if( isset( $options[$this->authFields["primary"]] ) )
 			return	$options[$this->authFields["primary"]];
-			
+
 		//	get table and ...
 		if( isset($options["table"] ) && isset( $this->tables[$options["table"]]["table"] ) )
 			$table	=	$this->tables[$options["table"]]["table"];
@@ -1771,13 +1767,13 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		unset( $fields["table"] );
 		unset( $fields["primary"] );
-		
+
 		$query		=	"SELECT ".$uidfield." FROM ".$table." WHERE 1";
 		if( is_array( $fields ) )
-			while( list( $field, $value ) = each( $fields ) )
+			foreach( $fields as $field => $value )
 				$query	.=	" AND ".$field."='".$value."'";
 
-		
+
 		//	get dbc for the query
 		if( isset( $options["table"] ) && isset( $this->dbcs[$this->tables[$options["table"]]["dbc"]] ) )
 			$dbc		=	&$this->dbcs[$this->tables[$options["table"]]["dbc"]];
@@ -1786,7 +1782,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		//	query database
 		$result			=	$dbc->query( $query );
-		
+
 		//	check, if only one
 		if( $result->numRows() == 1 )
 		{
@@ -1800,7 +1796,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		return	false;
 	}
-	
+
    /**
 	*	modify an existing user
 	*
@@ -1812,7 +1808,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !is_array( $data ) )
 		{
-			$this->setError( patUSER_NO_DATA_GIVEN ); 
+			$this->setError( patUSER_NO_DATA_GIVEN );
 			return	false;
 		}
 
@@ -1838,38 +1834,38 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		$primary	=	false;
 		$minentries	=	0;
 		$maxentries	=	-1;
-		
-		
+
+
 		if( isset( $options["table"] ) )
 		{
 			if( isset( $this->tables[$options["table"]]["table"] ) )
 				$table		= $this->tables[$options["table"]]["table"];
-			
-			if( isset( $this->tables[$options["table"]]["foreign"] ) ) 
+
+			if( isset( $this->tables[$options["table"]]["foreign"] ) )
 				$uidfield	=	$this->tables[$options["table"]]["foreign"];
-				
+
 			if( isset( $this->tables[$options["table"]]["primary"] ) )
 				$primary	=	$this->tables[$options["table"]]["primary"];
-				
+
 			if( isset( $this->tables[$options["table"]]["minentries"] ) )
 				$minentries	=	$this->tables[$options["table"]]["minentries"];
-			
+
 			if( isset( $this->tables[$options["table"]]["maxentries"] ) )
 				$maxentries	=	$this->tables[$options["table"]]["maxentries"];
 		}
 
 		if( $uidfield == $primary )
 			$primary	=	false;
-	
+
 		// get primary if for auth-table
 		if( $table == $this->authTable )
 		{
 			$primary	=	$this->authFields["primary"];
-		
+
 			//	modifying auth data => check it first
 			if( isset( $data[$this->authFields["passwd"]] ) )
 			{
-			
+
 				//	check password
 				if( is_array( $data[$this->authFields["passwd"]] ) )
 				{
@@ -1878,7 +1874,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 						$this->setError( patUSER_NEED_PASSWD );
 					elseif( $data[$this->authFields["passwd"]][0] != $data[$this->authFields["passwd"]][1] )
 						$this->setError( patUSER_PASSWD_MISMATCH );
-						
+
 					$data[$this->authFields["passwd"]]	=	$data[$this->authFields["passwd"]][0];
 				}
 				else
@@ -1886,14 +1882,14 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 					if( empty( $data[$this->authFields["passwd"]] ) )
 						$this->setError( patUSER_NEED_PASSWD );
 				}
-	
+
 				$data[$this->authFields["passwd"]]	=	$this->encryptPasswd( $data[$this->authFields["passwd"]] );
-						
+
 				if( count( $this->getAllErrorCodes() ) )
 					return	false;
 			}
 		}
-		
+
 		//	check, whether a value for the primary key was given
 		$primaryval	=	$uid;
 		if( $primary )
@@ -1905,13 +1901,13 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			elseif( isset( $options["olddata"] ) )
 				$primaryval	=	$this->getPrimaryValue( $uid, $table, $options["olddata"] );
 		}
-		
+
 		$dbc		=&	$this->getDbc( $table );
-		
+
 		if( !isset( $options["mode"] ) )
 			$options["mode"]	=	"update";
-			
-		
+
+
 		switch( strtolower( $options["mode"] ) )
 		{
 			//	insert a new entry
@@ -1923,12 +1919,12 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				}
 
 				$set	=	array();
-				
+
 				// add the userid to the query
 				if( $table != $this->authTable )
 					array_push( $set,  $uidfield."='".$uid."'" );
-					
-				while( list( $field, $value ) = each( $data ) )
+
+				foreach( $data as $field => $value )
 					if( $field != $uidfield )
 						$set[]		=	$field."='".addslashes( $value )."'";
 
@@ -1944,7 +1940,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 				if( $primary )
 					return	$primaryval;
-					
+
 				return	true;
 
 				break;
@@ -1959,7 +1955,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				}
 
 				$set	=	array();
-				while( list( $field, $value ) = each( $data ) )
+				foreach( $data as $field => $value )
 					$set[]		=	$field."='".addslashes( $value )."'";
 
 				$query		=	"UPDATE ".$table." SET ".implode( ",", $set )." WHERE ".$uidfield."='".$uid."'";
@@ -1967,17 +1963,17 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 					$query	.=	" AND ".$primary."='".$primaryval."'";
 
 				$dbc->query( $query );
-				
+
 				if( $primary )
 					return	$primaryval;
-					
+
 				return	true;
-				
+
 				break;
 		}
 		return	false;
 	}
-	
+
    /**
 	*	delete (data of) an existing user
 	*
@@ -2008,12 +2004,12 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		$primary	=	false;
 		$minentries	=	1;
 		$maxentries	=	1;
-		
+
 		if( isset( $options["table"] ) )
 		{
 			if( isset( $this->tables[$options["table"]]["table"] ) )
 				$table	=	$this->tables[$options["table"]]["table"];
-				
+
 			if( isset( $this->tables[$options["table"]]["foreign"] ) )
 				$uidfield	=	$this->tables[$options["table"]]["foreign"];
 
@@ -2021,7 +2017,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				$primary	=	$this->tables[$options["table"]]["primary"];
 			if( isset( $this->tables[$options["table"]]["minentries"] ) )
 				$minentries	=	$this->tables[$options["table"]]["minentries"];
-				
+
 			if( isset( $this->tables[$options["table"]]["maxentries"] ) )
 				$maxentries	=	$this->tables[$options["table"]]["maxentries"];
 		}
@@ -2032,26 +2028,25 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			$this->setError( patUSER_TABLE_DOES_NOT_EXIST );
 			return	false;
 		}
-		
-		
+
+
 		switch( $table )
 		{
 			//	delete user
 			case	$this->authTable:
 				//	Delete all additional data
-				reset( $this->tables );
-				while( list( $table, $data ) = each( $this->tables ) )
+				foreach( $this->tables as $table => $data )
 				{
-					
+
 					if( isset( $data["table"] ) )
 					{
 						$tablename	=	$data["table"];
-						
+
 						$uidfield	=	isset( $data["foreign"] ) ? $data["foreign"] : $this->authFields["primary"];
-						
+
 						$query		=	"DELETE FROM ".$tablename." WHERE ".$uidfield."='".$uid."'";
 						$dbc		=&	$this->getDbc( $table );
-						
+
 						$dbc->query( $query );
 					}
 				}
@@ -2060,7 +2055,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 				//	delete all his permissions
 				$this->deletePermission( array( "id" => $uid, "id_type" => "user" ) );
-				
+
 				//	Delete from authTable
 				$query	=	"DELETE FROM ".$this->authTable." WHERE ".$this->authFields["primary"]."='".$uid."'";
 				$this->authDbc->query( $query );
@@ -2096,12 +2091,12 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 				$this->setError( patUSER_NO_DATA_CHANGED );
 				return	false;
-				
+
 				break;
 		}
 		return	false;
 	}
-	
+
    /**
 	*	get the value of the primary key in an additional table
 	*	identifies a unique line in an additional table
@@ -2121,9 +2116,9 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		$tablename	=	isset( $this->tables[$table]["table"] ) ? $this->tables[$table]["table"] : $this->authTable;
 		$uidfield	=	isset( $this->tables[$table]["foreign"] ) ? $this->tables[$table]["foreign"] : $this->authFields["primary"];
 		$primary	=	isset( $this->tables[$table]["primary"] ) ? $this->tables[$table]["primary"] : $this->authFields["primary"];
-		
+
 		$where		=	array( $uidfield."='".$uid."'" );
-		while( list( $field, $value ) = each( $data ) )
+		foreach( $data as $field => $value )
 			$where[]	=	$field."='".$value."'";
 
 		$query		=	"SELECT ".$primary." FROM ".$tablename." WHERE ".implode( " AND ", $where );
@@ -2167,17 +2162,17 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		}
 		$tablename	=	isset( $this->tables[$table]["table"] ) ? $this->tables[$table]["table"] : $this->authTable;
 		$uidfield	=	isset( $this->tables[$table]["foreign"] ) ? $this->tables[$table]["foreign"] : $this->authFields["primary"];
-		
+
 		$query		=	"SELECT COUNT(*) AS entries FROM ".$tablename." WHERE ".$uidfield."='".$uid."'";
 		$dbc		=&	$this->getDbc( $table );
 		$result		=	$dbc->query( $query );
 
 		if( $result->numRows() == 0 )
 			return	0;
-		
+
 		list( $entries )	=	$result->fetchRow( DB_FETCHMODE_ORDERED );
 		$result->free();
-		
+
 		return	$entries;
 	}
 
@@ -2206,15 +2201,14 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			$bind		=	" OR ";
 		else
 			$bind		=	" AND ";
-		
-		reset( $groups );
-		while( list( $dbc, $criterias ) = each( $groups ) )
+
+		foreach( $groups as $dbc => $criterias )
 		{
 			$dbc			=	$this->getDbc( $criterias[0]["table"] );
 
 			$select			=	array();
 			$having			=	array();
-			
+
 			$tables			=	array();
 			$where			=	array();
 			$uids			=	array();
@@ -2224,11 +2218,11 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			{
 				$tablename	=	isset( $this->tables[$criterias[$i]["table"]]["table"] ) ? $this->tables[$criterias[$i]["table"]]["table"] : $this->authTable;
 				$uidfield	=	isset( $this->tables[$criterias[$i]["table"]]["foreign"] ) ? $this->tables[$criterias[$i]["table"]]["foreign"] : $this->authFields["primary"];
-	
+
 				//	add the table to the list of all used tables
 				if( !in_array( $tablename, $tables ) )
 					$tables[]	=	$tablename;
-				
+
 				//	add the uid field to the list of all uids
 				if( !in_array( $tablename.".".$uidfield, $uids ) )
 					$uids[]	=	$tablename.".".$uidfield;
@@ -2238,7 +2232,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 				//	use the condition in the where statement
 				$var			=	"where";
-				
+
 				//	check for extras
 				if( $criterias[$i]["extra"] )
 				{
@@ -2269,7 +2263,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 			if( count( $where ) )
 				$query	=	$query." WHERE (".implode( $bind, $where ).")";
-			
+
 			$where		=	array();
 			if( count( $uids ) > 1 )
 			{
@@ -2310,7 +2304,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	*
 	*	@access	public
 	*	@param	string	$field	name of the table
-	*	@param	integer	$uid	user id, if no uid is givven the authenticated user will be used	
+	*	@param	integer	$uid	user id, if no uid is givven the authenticated user will be used
 	*	@return	mixed	$value	value of the field
 	*/
 	function	getField( $field, $uid = 0 )
@@ -2326,15 +2320,15 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		if( !$this->fieldLocs[$field] )
 			return	false;
-		
+
 		//	get table and primary key from options
 		$table		=	isset( $this->tables[$this->fieldLocs[$field]["table"]]["table"] ) ? $this->tables[$this->fieldLocs[$field]["table"]]["table"] : $this->authTable;
 		$uidfield	=	isset( $this->tables[$this->fieldLocs[$field]["table"]]["foreign"] ) ? $this->tables[$this->fieldLocs[$field]["table"]]["foreign"] : $this->authFields["primary"];
-		
+
 		$query		=	"SELECT ".$this->fieldLocs[$field]["field"]." FROM ".$table." WHERE ".$uidfield."='".$uid."'";
-		
+
 		$dbc		=	&$this->getDbc( $this->fieldLocs[$field]["table"] );
-		
+
 		//	query database
 		$result			=	$dbc->query( $query );
 
@@ -2384,19 +2378,19 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !$gid = $this->identifyGroup( $clause ) )
 			return	false;
-		
+
 		if( is_array( $fields ) && count( $fields ) > 0 )
 			$fields	=	implode( ",", $fields );
 		else
 			$fields	=	"*";
-		
+
 		$query		=	"SELECT ".$fields." FROM ".$this->groupTable." WHERE ".$this->groupFields["primary"]."='".$gid."'";
-	
+
 		//	query database
 		return 	$this->authDbc->getAll( $query, array(), DB_FETCHMODE_ASSOC );
 	}
-	
-	
+
+
    /**
 	*	identify a group by certain fields
 	*
@@ -2410,8 +2404,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		if( is_array( $fields ) )
 		{
-			reset( $fields );
-			while( list( $field, $value ) = each( $fields ) )
+			foreach( $fields as $field => $value )
 				$where[]	=	$field."='".$value."'";
 		}
 
@@ -2424,7 +2417,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		{
 			$group		=	$result->fetchRow( DB_FETCHMODE_ASSOC );
 			return (int) $group[$this->groupFields["primary"]];
-			
+
 		}
 		elseif( $result->numRows() == 0 )
 			if( $createError )
@@ -2435,7 +2428,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		return	false;
 	}
-	
+
 
    /**
 	*	modify an existing group
@@ -2448,7 +2441,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !is_array( $olddata ) || !is_array( $newdata ) )
 		{
-			$this->setError( patUSER_NO_DATA_GIVEN ); 
+			$this->setError( patUSER_NO_DATA_GIVEN );
 			return	false;
 		}
 
@@ -2458,7 +2451,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			$this->setError( patUSER_NEED_GROUPNAME );
 			return	false;
 		}
-			
+
 		//	check whether user already exists
 		if( $gid = $this->identifyGroup( array( $this->groupFields["name"] => $newdata[$this->groupFields["name"]] ), false ) )
 		{
@@ -2473,17 +2466,16 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			return	false;
 
 		$set	=	array();
-		reset( $newdata );
-		while( list( $field, $value ) = each( $newdata ) )
+		foreach( $newdata as $field => $value )
 			if( in_array( $field, $this->groupFields ) )
 				$set[]	=	$field."='".addslashes( $value )."'";
- 
+
 		$query		=	"UPDATE ".$this->groupTable." SET ".implode( ",", $set )." WHERE ".$this->groupFields["primary"]."='".$gid."'";
 
 		$this->authDbc->query( $query );
 		return	true;
 	}
-	
+
 
    /**
 	*	adds a group
@@ -2496,7 +2488,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !is_array( $data ) || count( $data ) == 0 )
 		{
-			$this->setError( patUSER_NO_DATA_GIVEN ); 
+			$this->setError( patUSER_NO_DATA_GIVEN );
 			return	false;
 		}
 
@@ -2506,7 +2498,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			$this->setError( patUSER_NEED_GROUPNAME );
 			return	false;
 		}
-			
+
 		//	check whether user already exists
 		if( $this->identifyGroup( array( $this->groupFields["name"] => $data[$this->groupFields["name"]] ), false ) )
 		{
@@ -2518,17 +2510,17 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			$data[$this->groupFields["primary"]]	=	$this->authDbc->nextId( $this->userIdSequence . "_groups" );
 
 		$gid	=	$data[$this->groupFields["primary"]];
-			
+
 		//	create query
 		$set	=	array();
-		while( list( $field, $value ) = each( $data ) )
+		foreach( $data as $field => $value )
 			if( in_array( $field, $this->groupFields ) )
 				$set[]	=	$field."='".addslashes( $value )."'";
-		
+
 		$query		=	"INSERT INTO ".$this->groupTable." SET ".implode( ",", $set );
-		
+
 		$this->authDbc->query( $query );
-		
+
 		return	$gid;
 	}
 
@@ -2550,14 +2542,14 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		//	delete all permissions
 		$this->deletePermission( array( "id" => $gid, "id_type" => "group" ) );
-		
+
 		//	delete group
 		$query	=	"DELETE FROM ".$this->groupTable." WHERE ".$this->groupFields["primary"]."='".$gid."'";
 		$this->authDbc->query( $query );
 
 		return	true;
 	}
-	
+
    /**
 	*	get joined groups
 	*
@@ -2578,11 +2570,11 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		{
 			$this->setError( patUSER_NEED_UID );
 			return	false;
-		}	
+		}
 		$query		=	"SELECT ".$this->groupTable.".* FROM ".$this->groupTable.",".$this->relTable." WHERE ".$this->relTable.".".$this->relFields["gid"]."=".$this->groupTable.".".$this->groupFields["primary"]." AND ".$this->relTable.".".$this->relFields["uid"]."='".$uid."'";
 
 		$query		.=	$this->convertOptionsToSql( $options );
-		
+
 		//	query database
 		return 	$this->authDbc->getAll( $query, array(), DB_FETCHMODE_ASSOC );
 	}
@@ -2617,7 +2609,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		}
 		else
 			$fields	=	$this->authTable.".*";
-			
+
 		$query		=	"SELECT ".$fields." FROM ".$this->authTable.",".$this->relTable." WHERE ".$this->relTable.".".$this->relFields["uid"]."=".$this->authTable.".".$this->authFields["primary"]." AND ".$this->relTable.".".$this->relFields["gid"]."='".$gid."'";
 		$query		.=	$this->convertOptionsToSql( $options );
 
@@ -2648,7 +2640,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		if( !$gid = $this->identifyGroup( array( "gid" => $gid )  ) )
 			return	false;
-			
+
 		//	check if group id is given
 		if( $relation["uid"] )
 			$uid	=	$relation["uid"];
@@ -2694,7 +2686,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			$this->setError( patUSER_NEED_GID );
 			return	false;
 		}
-				
+
 		if( $gid != "all" )
 		{
 			if( !$gid = $this->identifyGroup( array( "gid" => $gid ) ) )
@@ -2703,7 +2695,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				return	false;
 			}
 		}
-				
+
 		//	check if group id is given
 		if( isset( $relation["uid"] ) )
 			$uid	=	$relation["uid"];
@@ -2733,7 +2725,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			$this->authDbc->query( $query );
 			return	true;
 		}
-		
+
 		if( !$this->isMemberOfGroup( $uid, $gid ) )
 		{
 			$this->setError( patUSER_NOT_IN_GROUP );
@@ -2741,7 +2733,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		}
 
 		$query	=	"DELETE FROM ".$this->relTable." WHERE ".$this->relFields["uid"]."='".$uid."' AND ".$this->relFields["gid"]."='".$gid."'";
-		
+
 		$this->authDbc->query( $query );
 		return	true;
 	}
@@ -2779,7 +2771,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !$this->usePermissions  )
 			return false;
-	
+
 		if( !$clause = $this->checkPermissionId( $clause ) )
 			return	false;
 
@@ -2788,14 +2780,14 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		unset( $clause[$this->permFields["id"]] );
 		unset( $clause[$this->permFields["id_type"]] );
-		
+
 		$where		=	array();
 		$type		=	strtolower( $type );
 		//	should groups perms also be fetched?
 		if( $id_type == "user" )
 		{
 			$tmp	=	array();
-			if( $type == "group" || $type == "both" ) 
+			if( $type == "group" || $type == "both" )
 			{
 				//	get all groups
 				$groups		=	$this->getJoinedGroups( array( "uid" => $id ) );
@@ -2803,18 +2795,18 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				for( $i=0; $i<count( $groups ); $i++ )
 					$tmp[]		=	"(".$this->permFields["id"]."='".$groups[$i][$this->groupFields["primary"]]."' AND ".$this->permFields["id_type"]."='group')";
 			}
-			
+
 			if( $type == "user" || $type == "both" )
 			{
 				//	where statement for user
 				$tmp[]		=	"(".$this->permFields["id"]."='".$id."' AND ".$this->permFields["id_type"]."='user')";
 			}
-			
+
 			//	put all statements in one
 			if( !empty( $tmp ) )
 				$where[]		=	"(" . implode( " OR ", $tmp ) . ")";
 		}
-		
+
 		if( $type == "all" )
 		{
 			// get all permissions for all users and groups
@@ -2829,37 +2821,36 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		//	include further params in the statement
 		if( is_array( $clause ) && count( $clause ) > 0 )
 		{
-			reset( $clause );
-			while( list( $field, $value ) = each( $clause ) )
+			foreach( $clause as $field => $value )
 			{
 				if( in_array( $field, $this->permFields ) )
 					$where[]	=	"(".$field."='".$value."' OR ".$field."='')";
 			}
 		}
-		
+
 		//	build query
-		$query		=	"SELECT ".implode( ",",$this->permFields )." FROM ".$this->permTable." WHERE ".implode( " AND ", $where );		
-		//echo "SQL Query: " .$query . "<br>";				
+		$query		=	"SELECT ".implode( ",",$this->permFields )." FROM ".$this->permTable." WHERE ".implode( " AND ", $where );
+		//echo "SQL Query: " .$query . "<br>";
 		$perms		=	$this->authDbc->getAll( $query, array(), DB_FETCHMODE_ASSOC );
-		
+
 		// Debug -- Mardini
 		//echo "Perms set: ";
 		//print_r($perms);
 		//echo "<br>";
-		
+
 		//	convert set to array
 		for( $i=0; $i<count( $perms ); $i++ ){
 			$perms[$i][$this->permFields["perms"]]		=	explode( ",", $perms[$i][$this->permFields["perms"]] );
 			// Debug -- Mardini
 			//echo "perms[".$i."]= ";
 			//print_r($perms[$i][$this->permFields["perms"]]);
-			//echo "<br>";			
+			//echo "<br>";
 			}
 		// Debug -- Mardini
 		//echo "perms array: " ;
 		//print_r($perms);
 		//echo "<br>";
-		
+
 		return	$perms;
 	}
 
@@ -2876,32 +2867,32 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !$this->usePermissions  )
 			return false;
-	
+
 		if( !$perm = $this->checkPermissionId( $perm ) )
-		
+
 			return	false;
-			
+
 		$id			=	$perm[$this->permFields["id"]];
 		$id_type	=	$perm[$this->permFields["id_type"]];
 
 		unset( $perm[$this->permFields["id"]] );
 		unset( $perm[$this->permFields["id_type"]] );
-		
+
 		//	extract permissions
 		$perms		=	$perm[$this->permFields["perms"]];
 		unset( $perm[$this->permFields["perms"]] );
 
 		if( !is_array( $perms ) )
 			$perms	=	array( $perms );
-		
+
 		$where		=	array();
 
 		if( count( $perms ) )
 		{
-			$tmp	=	array();			
-			
+			$tmp	=	array();
+
 			for( $i=0; $i<count( $perms ); $i++ )
-			{	
+			{
 				/*
 				echo "perms[i] = ";
 				var_dump	($perms[$i]);
@@ -2914,10 +2905,10 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 					$tmp[]			=	"FIND_IN_SET('".$perms[$i]."', ".$this->permFields["perms"].")>0";
 			}
 			if( count( $tmp ) )
-			{				
+			{
 				if( $mode == "any" )
 					$where[]		=	"(".implode( " OR ", $tmp ).")";
-				else					
+				else
 					$where[]		=	"(".implode( " AND ", $tmp ).")";
 			}
 		}
@@ -2933,7 +2924,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			//	add where statement for each group
 			for( $i=0; $i<count( $groups ); $i++ )
 				$tmp[]		=	"(".$this->permFields["id"]."='".$groups[$i][$this->groupFields["primary"]]."' AND ".$this->permFields["id_type"]."='group')";
-			
+
 			//	put all statements in one
 			$where[]		=	"(" . implode( " OR ", $tmp ) . ")";
 		}
@@ -2941,19 +2932,18 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			//	only one statement needed
 			$where[]	=	$this->permFields["id"]."='".$id."' AND ".$this->permFields["id_type"]."='".$id_type."'";
 
-			
-		
+
+
 		//	include further params in the statement
 		if( is_array( $perm ) && count( $perm ) > 0 )
 		{
-			reset( $perm );
-			while( list( $field, $value ) = each( $perm ) )
+			foreach( $perm as $field => $value )
 			{
 				if( in_array( $field, $this->permFields ) )
 					$where[]	=	"(".$field."='".$value."' OR ".$field."='')";
 			}
 		}
-			
+
 		$hasPermission	=	false;
 		//	build query
 		$query		=	"SELECT ".implode( ",",$this->permFields )." FROM ". $this->permTable ." WHERE ".implode( " AND ", $where );
@@ -2962,15 +2952,15 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		echo "query = " ;
 		var_dump($query);
 		echo "<br>";
-		*/		
+		*/
 		if( !DB::isError( $result ) &&  $result->numRows() > 0 )
 			$hasPermission	=	true;
 
 		$result->free();
-		
-		return	$hasPermission;		
+
+		return	$hasPermission;
 	}
-	
+
    /**
 	*	add permission(s)
 	*
@@ -2982,7 +2972,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !$this->usePermissions  )
 			return false;
-	
+
 		if( !$perm = $this->checkPermissionId( $perm ) )
 			return	false;
 
@@ -3003,7 +2993,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !$this->usePermissions  )
 			return false;
-	
+
 		if( !$perm = $this->checkPermissionId( $perm ) )
 			return	false;
 
@@ -3023,36 +3013,35 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	*
 	*	@access	private
 	*	@param	array	$perm	array that defines the permission
-	*	@return	int		$old	old permissions for this entry		
+	*	@return	int		$old	old permissions for this entry
 	*/
 	function	getOldPermission( $perm )
 	{
 		if( !$this->usePermissions  )
 			return false;
-	
+
 		$fields		=	array_values( $this->permFields );
 		for( $i=0; $i<count( $fields ); $i++ )
 			if( !isset( $perm[$fields[$i]] ) )
 				$perm[$fields[$i]]	=	"";
 
 		unset( $perm[$this->permFields["perms"]] );
-				
+
 		//	delete old permissions
 		$where		=	array();
-		reset( $perm );
-		while( list( $field, $value ) = each( $perm ) )
+		foreach( $perm as $field => $value )
 			if( in_array( $field, $this->permFields ) )
 				$where[]	=	$field."='".$value."'";
-		
+
 		$query	=	"SELECT ".$this->permFields["perms"]."+0 FROM ".$this->permTable." WHERE ".implode( " AND ", $where );
 		$result	=	$this->authDbc->query( $query );
-		
+
 		$old	=	0;
 		while( $row = $result->fetchRow() )
 		{
 			$old	=	$old | $row[0];
 		}
-			
+
 		$result->free();
 		return	$old;
 	}
@@ -3068,18 +3057,17 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !$this->usePermissions  )
 			return false;
-	
+
 		if( !$clause = $this->checkPermissionId( $clause ) )
 			return	false;
 
 		unset( $clause[$this->permFields["perms"]] );
-			
+
 		$where		=	array();
-		reset( $clause );
-		while( list( $field, $value ) = each( $clause ) )
+		foreach( $clause as $field => $value )
 			if( in_array( $field, $this->permFields ) )
 				$where[]	=	$field."='".$value."'";
-				
+
 		$query	=	"DELETE FROM ".$this->permTable." WHERE ".implode( " AND ", $where );
 		$this->authDbc->query( $query );
 		return	true;
@@ -3092,13 +3080,13 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	*	@param	array	$perm	array containg fields/values to identify the permission
 	*	@return	bool	$success
 	*/
-	
+
 	function	checkPermissionId( $perm )
 	{
 		//	check if  id is given
-		if( isset( $perm["id"] ) ) 
+		if( isset( $perm["id"] ) )
 			$id		=	$perm["id"];
-						
+
 		elseif( isset( $perm[$this->permFields["id"]] ) )
 			$id		=	$perm[$this->permFields["id"]];
 		//	No user ID => use logged in user
@@ -3115,9 +3103,9 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		}
 
 		//	check for id_type
-		if( $perm["id_type"] ) 
+		if( $perm["id_type"] )
 			$id_type		=	$perm["id_type"];
-			
+
 		elseif( $perm[$this->permFields["id_type"]] )
 			$id_type		=	$perm[$this->permFields["id_type"]];
 		else
@@ -3134,7 +3122,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		return	$perm;
 	}
-	
+
    /**
 	*	set a permission
 	*
@@ -3145,9 +3133,9 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( !$this->usePermissions  )
 			return false;
-	
+
 		$perm[$this->permFields["perms"]]	=	$this->convertPermToInt( $perm[$this->permFields["perms"]] );
-		
+
 		$fields		=	array_values( $this->permFields );
 		for( $i=0; $i<count( $fields ); $i++ )
 			if( !isset( $perm[$fields[$i]] ) )
@@ -3157,30 +3145,28 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		unset( $permdel[$this->permFields["perms"]] );
 		//	delete old permissions
 		$where		=	array();
-		reset( $permdel );
-		while( list( $field, $value ) = each( $permdel ) )
+		foreach( $permdel as $field => $value )
 			if( in_array( $field, $this->permFields ) )
 				$where[]	=	$field."='".$value."'";
 
 		$query		=	"DELETE FROM ".$this->permTable." WHERE ".implode( " AND ", $where );
 		$this->authDbc->query( $query );
-		
+
 		if( $perm[$this->permFields["perms"]] == 0 )
 			return	true;
-		
+
 		//	insert new permissions
 		$set		=	array();
-		reset( $perm );
-		while( list( $field, $value ) = each( $perm ) )
+		foreach( $perm as $field => $value )
 			if( in_array( $field, $this->permFields ) )
 				if( is_int( $value ) )
 					$set[]	=	$field."=".addslashes( $value );
 				else
 					$set[]	=	$field."='".addslashes( $value )."'";
-					
+
 		$query		=	"INSERT INTO ".$this->permTable." SET ".implode( ",", $set );
 		$this->authDbc->query( $query );
-	
+
 		return true;
 	}
 
@@ -3195,18 +3181,18 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( is_int( $perm ) )
 			return	$perm;
-			
+
 		if( is_string( $perm ) )
 			$perm	=	explode( ",", $perm );
 
 		if( count( $this->permsConv ) == 0 )
 			$this->buildPermsConv();
-			
+
 		$int		=	0;
 		for( $i=0; $i<count( $perm ); $i++ )
 			$int	=	$int | $this->permsConv[$perm[$i]];
-		
-		return	$int;	
+
+		return	$int;
 	}
 
    /**
@@ -3220,15 +3206,14 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		if( is_array( $int ) )
 			return	implode( ",", $int );
-			
+
 		$perm	=	array();
-		reset( $this->perms );
-		while( list( $key, $value ) = each( $this->perms ) )
+		foreach( $this->perms as $key => $value )
 		{
 			if( $int & $key )
 				array_push( $perm, $value );
 		}
-		
+
 		return	implode( ",", $perm );
 	}
 
@@ -3239,14 +3224,13 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	*/
 	function	buildPermsConv()
 	{
-		reset( $this->perms );
-		while( list( $key, $value ) = each( $this->perms ) )
+		foreach( $this->perms as $key => $value )
 			$this->permsConv[$value]	=	$key;
 	}
-	
+
    /**
 	*	update all statistics
-	*	
+	*
 	*	@access	public
 	*/
 	function	updateStats()
@@ -3275,7 +3259,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			}
 			$this->storeSessionValue( "patUserLastAccess", time() );
 		}
-			
+
 		//	anything needs to be updated?
 		if( count( $set ) > 0 )
 		{
@@ -3312,7 +3296,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			for( $i=0; $i<count( $clause ); $i++ )
 				$where[]	=	$this->buildWhereStatement( $clause[$i]["field"], $clause[$i]["value"], $clause[$i]["match"] );
 		}
-		
+
 		//	build the query
 		$query		=	"SELECT ".$fields." FROM ".$table;
 		if( count( $where ) > 0 )
@@ -3322,9 +3306,9 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			else
 				$query	.=	" WHERE ".implode( " AND ", $where );
 		}
-				
+
 		$query		.=	$this->convertOptionsToSql( $options );
-	
+
 		return	$query;
 	}
 
@@ -3332,7 +3316,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
    /**
 	*	get information about table fields
 	*	like DESCRIBE [table]
-	* 
+	*
 	*	@access	public
 	*	@param	string	$tablename	internal table name
 	*	@return	array	$desc	table description
@@ -3342,23 +3326,23 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		$table		=	isset( $this->tables[$tablename] ) ? $this->tables[$tablename]["table"] : $this->authTable;
 
 		$dbc	=	&$this->getDbc( $tablename );
-	
+
 		// get table info
-		$query	=	"SHOW COLUMNS FROM ". $table . ";"; 
-		if( !$result	=	$dbc->query( $query ) ) 
+		$query	=	"SHOW COLUMNS FROM ". $table . ";";
+		if( !$result	=	$dbc->query( $query ) )
 		{
 			$this->setError( patUSER_NO_DB_RESULT );
 			return false;
 		}
 		$data	=	$result->get_result( patDBC_TYPEASSOC );
 		$result->free();
-		
+
 		// search field
 		reset( $data );
 		$desc	=	array();
 		for( $i = 0; $i < count( $data ); $i++ )
 		{
-			$desc[$i]	=	array( 
+			$desc[$i]	=	array(
 									"field"		=>	$data[$i]["Field"],
 									"type"		=>	"unknown",
 									"type_info"	=>	false,
@@ -3366,9 +3350,9 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 									"key"		=>	$data[$i]["Key"],
 									"default"	=>	$data[$i]["Default"],
 									"extra"		=>	$data[$i]["Extra"]
-								); 
+								);
 			unset( $match );
-	
+
 			// get "type" and "type_info"
 			// SET or ENUM
 			if( preg_match( "/(set|enum)\((\'.*\',?)*\)/", $data[$i]["Type"], $match ) )
@@ -3377,11 +3361,11 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				$match						=	explode( ",", $match[2] );
 				for ( $j = 0; $j < count( $match ); $j++ )
 					$match[$j] = substr( $match[$j], 1, -1 );
-	
+
 				$desc[$i]["type_info"]	=	$match;
 				continue;
 			}
-	
+
 			// TINYINT, INT, CHAR, VARCHAR
 			if ( preg_match( "/(int|tinyint|char|varchar)\((.*)\)/", $data[$i]["Type"], $match ) )
 			{
@@ -3389,7 +3373,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				$desc[$i]["type_info"]["length"]	=	$match[2];
 				continue;
 			}
-			
+
 			// default
 			$desc[$i]["type"] = $data[$i]["Type"];
 		}
@@ -3459,7 +3443,6 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			case	"neq":
 			case	"!=":
 			case	"<>":
-			default:
 				$statement	=	$field."<>'".$value."'";
 				break;
 
@@ -3513,7 +3496,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		}
 		return	$sql;
 	}
-	
+
    /**
 	*	create url for PHP_SELF
 	*
@@ -3533,15 +3516,15 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 			$vars	=	array_merge( $HTTP_GET_VARS, $HTTP_POST_VARS );
 			$self	=	$PHP_SELF."?".SID;
 		}
-	
+
 		if( is_array( $vars ) )
 		{
-			while( list( $key, $val ) = each( $vars ) )
+			foreach( $vars as $key => $val )
 				if( $val != session_id() && !in_array( $key, $this->ignoreVars ) && !in_array( $key, $this->authFields ) )
 					$self	.=	"&".$key."=".$val;
 		}
-				
-		return	$self;	
+
+		return	$self;
 	}
 
    /**
@@ -3550,7 +3533,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	*	@param		string			$table	name of the table
 	*	@return		object patDbc	$dbc	reference to the dbc object
 	*/
-	function	&getDbc( $table ) 
+	function	&getDbc( $table )
 	{
 		//	get dbc for the query
 		if( isset( $this->tables[$table] ) && isset( $this->dbcs[$this->tables[$table]["dbc"]] ) )
@@ -3560,8 +3543,8 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		return	$dbc;
 	}
-	
-	
+
+
    /**
 	*	set error code
 	*
@@ -3602,7 +3585,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		return	$this->errors[(count( $this->errors )-1)];
 	}
-	
+
    /**
 	*	get the last error message
 	*
@@ -3613,7 +3596,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	{
 		return	$this->translateErrorCode( $this->errors[(count( $this->errors )-1)] );
 	}
-	
+
    /**
 	*	get the last error code AND message
 	*
@@ -3625,7 +3608,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		return	array(	"code"		=>	$this->errors[(count( $this->errors )-1)],
 						"message"	=>	$this->translateErrorCode( $this->errors[(count( $this->errors )-1)] ) );
 	}
-	
+
    /**
 	*	get all error codes
 	*
@@ -3718,7 +3701,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				case	"crypt":
 					if( $salt === false )
 						$salt	=	$this->generateSaltValue();
-						
+
 					$passwd	=	call_user_func( $this->cryptFunction, $passwd, $salt );
 					break;
 				default:
@@ -3728,26 +3711,26 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		}
 		return	$passwd;
 	}
-	
+
    /**
 	* generate a salt
 	*
 	*	According to man(3) crypt:
-	*	The salt is a two-character string chosen from the set [a-zA-Z0-9./]; 
+	*	The salt is a two-character string chosen from the set [a-zA-Z0-9./];
 	*	this string is used to perturb the hashing algorithm in one of 4096 different ways.
-	* 
+	*
 	*
 	*	@access private
 	*	@return string $salt randomly generated two-character salt value.
 	*/
-	function generateSaltValue() 
+	function generateSaltValue()
 	{
 		$saltValues = range('a', 'z');
 		$saltValues = array_merge($saltValues, range('A', 'Z'));
 		$saltValues = array_merge($saltValues, range('0', '9'));
 		$saltValues[] = '.';
-		$saltValues[] = '/';		
-		
+		$saltValues[] = '/';
+
 		return $saltValues[rand(0, count($saltValues))] . $saltValues[rand(0, count($saltValues))];
 	}
 }

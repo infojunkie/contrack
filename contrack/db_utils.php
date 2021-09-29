@@ -1,4 +1,4 @@
-	
+
 <?php
 /**
 * Copyright OpenCraft |  http://www.open-craft.com
@@ -22,6 +22,7 @@
 ************************************************************************/
 error_reporting( E_ALL );
 require_once("conf/configuration.php");
+require_once("mysql.php");
 
 /* Connect to DB */
 $contrack_connection = mysql_pconnect($hostname_contrack, $username_contrack, $password_contrack) or die(mysql_error());
@@ -29,62 +30,62 @@ mysql_select_db($database_contrack) or die(mysql_error());
 
 /*
 	Function: mysql_decode ( )
-	Desc:  
-		Converts strings returned from DB to their applicable HTML characters (if any) 
+	Desc:
+		Converts strings returned from DB to their applicable HTML characters (if any)
 		and strips any slashes
- 	Parms: 
+ 	Parms:
     	$str_x - string returned from DB that needs to be converted
-   	Returns: 	
+   	Returns:
 		Decoded string
 */
-function mysql_decode($str_x) 
+function mysql_decode($str_x)
 {
 	return stripslashes(html_entity_decode($str_x));
 }
 
 /*
 	Function: mysql_encode ( )
-	Desc:  
+	Desc:
 		Makes strings SQL safe by escaping special characters (i.e. ')
- 	Parms: 
+ 	Parms:
     	$str_x - string to be sent to the MySQL DB
-   	Returns: 
+   	Returns:
 		Encoded SQL-safe string
 */
-function mysql_encode($str_x) 
+function mysql_encode($str_x)
 {
 	return mysql_real_escape_string($str_x);
 }
 
 /*
 	Function: mysql_encode_w_quotes ( )
-	Desc:  
+	Desc:
 		Makes strings SQL safe by escaping special characters (i.e. ') and adding the single
 		quotes around the passed value
- 	Parms: 
+ 	Parms:
     	$str_x - string to be sent to the MySQL DB
-   	Returns: 
+   	Returns:
 		Encoded SQL-safe string
 */
-function mysql_encode_w_quotes($str_x) 
+function mysql_encode_w_quotes($str_x)
 {
 	return "'". mysql_real_escape_string($str_x) . "'";
 }
 /*
 	Function: get_country_name ( )
-	Desc:  
+	Desc:
 		Gets the country name from the COUNTRY table in the DB given the $country_id
- 	Parms: 
+ 	Parms:
     	$int_country_id - country ID
-   	Returns: 
+   	Returns:
 		Country name if it exists, empty string otherwise.
 */
-function get_country_name($int_country_id) 
+function get_country_name($int_country_id)
 {
 
 	if  ( ($int_country_id != 0 ) && (!empty($int_country_id)) ){
 		$sql = "SELECT NAME FROM country WHERE COUNTRY_ID=". $int_country_id;
-		$result = mysql_query($sql) or die(mysql_error());	
+		$result = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($result);
 		if (mysql_num_rows($result)){
 			return $row['NAME'];
@@ -100,19 +101,19 @@ function get_country_name($int_country_id)
 
 /*
 	Function: get_party_name ( )
-	Desc:  
+	Desc:
 		Gets the party name from the PARTY table in the DB given the $int_party_id
- 	Parms: 
+ 	Parms:
     	$int_party_id - Party ID
-   	Returns: 
+   	Returns:
 		Party name if it exists, empty string otherwise.
 */
-function get_party_name($int_party_id) 
+function get_party_name($int_party_id)
 {
 
 	if  ( ($int_party_id != 0 ) && (!empty($int_party_id)) ){
 		$sql = "SELECT NAME FROM party WHERE PARTY_ID=". $int_party_id;
-		$result = mysql_query($sql) or die(mysql_error());	
+		$result = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($result);
 		if (mysql_num_rows($result)){
 			return $row['NAME'];
@@ -127,18 +128,18 @@ function get_party_name($int_party_id)
 }
 /*
 	Function: get_party_id_for_user ( )
-	Desc:  
+	Desc:
 		Fetches associated party id for given user
- 	Parms: 
+ 	Parms:
     	$int_uid
-   	Returns: 
+   	Returns:
 		party_id on success, blank on error
 */
-function get_party_id_for_user($int_uid) 
+function get_party_id_for_user($int_uid)
 {
 	if  ($int_uid != 0 ) {
 		$sql = "SELECT PARTY_ID FROM user WHERE uid=". $int_uid;
-		$result = mysql_query($sql) or die(mysql_error());	
+		$result = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($result);
 		if (mysql_num_rows($result)){
 			return $row['PARTY_ID'];
@@ -153,19 +154,19 @@ function get_party_id_for_user($int_uid)
 }
 /*
 	Function: get_currency_desc ( )
-	Desc:  
+	Desc:
 		Gets the currency desc from the CURRENCY table in the DB given the $int_currency_id
- 	Parms: 
+ 	Parms:
     	$int_currency_id - Currency ID
-   	Returns: 
+   	Returns:
 		Currency desc if it exists, empty string otherwise.
 */
-function get_currency_desc($int_currency_id) 
+function get_currency_desc($int_currency_id)
 {
 
 	if  ( ($int_currency_id != 0 ) && (!empty($int_currency_id)) ){
 		$sql = "SELECT NAME FROM currency WHERE CURRENCY_ID=". $int_currency_id;
-		$result = mysql_query($sql) or die(mysql_error());	
+		$result = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($result);
 		if (mysql_num_rows($result)){
 			return $row['NAME'];
@@ -180,22 +181,22 @@ function get_currency_desc($int_currency_id)
 }
 /*
 	Function: get_date_created_for_entity ( )
-	Desc:  
+	Desc:
 		Fetches the date_created field for the given entity id
- 	Parms: 
-    	$int_entity_type_id 
+ 	Parms:
+    	$int_entity_type_id
 		$int_entity_id
-   	Returns: 
+   	Returns:
 		date_created on success, blank on error
 */
-function get_date_created_for_entity($int_entity_type_id, $int_entity_id) 
+function get_date_created_for_entity($int_entity_type_id, $int_entity_id)
 {
 	if  (($int_entity_id != 0 ) && ($int_entity_type_id != 0)) {
 		switch ($int_entity_type_id) {
 			case entity_AGENT:
 			case entity_BUYER:
 			case entity_SUPPLIER:
-			case entity_EXTERNAL:									
+			case entity_EXTERNAL:
 			$table_name = 'party';
 			$pk_name    = 'party_id';
 			break;
@@ -210,11 +211,11 @@ function get_date_created_for_entity($int_entity_type_id, $int_entity_id)
 			case entity_SINGLE_ORDER:
 			$table_name = 'single_order';
 			$pk_name    = 'single_order_id';
-			break;		
+			break;
 			default:   //what do i do here?
-		}									
-		$sql = "SELECT DATE_CREATED FROM ". $table_name. " WHERE ". $pk_name." = ". $int_entity_id;		
-		$result = mysql_query($sql) or die(mysql_error());	
+		}
+		$sql = "SELECT DATE_CREATED FROM ". $table_name. " WHERE ". $pk_name." = ". $int_entity_id;
+		$result = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($result);
 		if (mysql_num_rows($result)){
 			return $row['DATE_CREATED'];
@@ -230,7 +231,7 @@ function get_date_created_for_entity($int_entity_type_id, $int_entity_id)
 
 /*
 	Generates select attachments SQL
-*/	
+*/
 function generate_select_attachments_sql ($table_name, $entity_id, $additional_where_clause = '')
 {
 	$select_sql = "	SELECT	ATTACHMENT_ID, FILENAME, DESCRIPTION, SIZE, DATE_CREATED
@@ -242,13 +243,13 @@ function generate_select_attachments_sql ($table_name, $entity_id, $additional_w
 
 /*
 	Delete attachment
-*/	
+*/
 
 function delete_attachment($attachment_id)
 {
 	if ($attachment_id > 0 ) {
-		$sql = "DELETE FROM attachment WHERE ATTACHMENT_ID =". $attachment_id; 
-		$result = mysql_query($sql) or die(mysql_error());	
+		$sql = "DELETE FROM attachment WHERE ATTACHMENT_ID =". $attachment_id;
+		$result = mysql_query($sql) or die(mysql_error());
 	}
 }
 ?>

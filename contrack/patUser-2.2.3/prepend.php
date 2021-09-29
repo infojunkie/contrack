@@ -11,7 +11,7 @@
 
 
 	// change the data-source name to fit your needs - see documentation at http://pear.php.net
-	$dsn	=	"mysql://username:password@localhost/contrack";
+	$dsn	=	"mysqli://contrack:contrack@db/contrack";
 
 	//	patTemplate is used for login screen
 
@@ -21,9 +21,9 @@
 
 	$tmpl->setBasedir( "templates" );
 
-	
 
-	
+
+
 
 	//	user management class
 
@@ -45,13 +45,13 @@
 
 	include_once( "DB.php" );
 
-	
+
 
 
 
 	// either set db-object...
 
-	$authDbc 	=&	DB::connect( $dsn );
+	$authDbc 	=	DB::connect( $dsn );
 
 	if( DB::isError( $authDbc ) )
 
@@ -63,17 +63,17 @@
 
 		print_r( $authDbc );
 
-		echo "</pre>";	
+		echo "</pre>";
 
 		die( "Database connection failed" );
 
-	}		
+	}
 
 	$user->setAuthDbc( $authDbc );
 
 
 
-/*		
+/*
 
 	// or setup authdbc by dsn
 
@@ -89,7 +89,7 @@
 
 		print_r( $authDbc );
 
-		echo "</pre>";	
+		echo "</pre>";
 
 		die( "Database connection failed" );
 
@@ -129,7 +129,7 @@
 
 	$user->setMaxLoginAttempts( 20 );
 
-	
+
 
 	//	if working with several databases, define them here
 
@@ -147,13 +147,13 @@
 
 												"foreign"	=>	"uid" ) );
 
-*/	
+*/
 
 
 
 	//	this table stores group data
 
-	$user->setGroupTable( "groups" );
+	$user->setGroupTable( "groupe" );
 
 	//	set fieldnames in the grouptable
 
