@@ -5,19 +5,16 @@ services:
   db:
     image: mysql
     ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_DATABASE=contrack
-      - MYSQL_USER=contrack
-      - MYSQL_PASSWORD=contrack
-      - MYSQL_ROOT_PASSWORD=contrack
+      - "${CONTRACK_MYSQL_PORT:-3306}:3306"
+    env_file:
+      - ./.env
     volumes:
       - db:/var/lib/mysql
       - ./sql:/etc/mysql/conf.d
   contrack:
     build: .
     ports:
-      - "${CONTRACK_PORT:-8080}:80"
+      - "${CONTRACK_WEB_PORT:-8080}:80"
     volumes:
       - ./contrack:/var/www/html
       - ./php.ini:/usr/local/etc/php/php.ini
