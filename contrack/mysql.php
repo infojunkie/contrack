@@ -1,8 +1,8 @@
 <?php
 
 // Shims to old-style mysql() functions.
-function mysql_pconnect($host,$user,$passwd) {
-  return mysqli_connect('p:'.$host,$user,$passwd);
+function mysql_pconnect($host, $user, $passwd) {
+  return mysqli_connect('p:'.$host, $user, $passwd);
 }
 
 function mysql_errno() {
@@ -38,17 +38,26 @@ function mysql_num_rows($result) {
 
 function mysql_query($sql) {
   global $contrack_connection;
-  return mysqli_query($contrack_connection,$sql);
+  return mysqli_query($contrack_connection, $sql);
 }
 
 function mysql_select_db($dbname) {
   global $contrack_connection;
-  return mysqli_select_db($contrack_connection,$dbname);
+  return mysqli_select_db($contrack_connection, $dbname);
 }
 
 function mysql_real_escape_string($data) {
   global $contrack_connection;
-  return mysqli_real_escape_string($contrack_connection,$data);
+  return mysqli_real_escape_string($contrack_connection, $data);
+}
+
+function mysql_free_result($result) {
+  return mysqli_free_result($result);
+}
+
+function mysql_get_server_info() {
+  global $contrack_connection;
+  return mysqli_get_server_info($contrack_connection);
 }
 
 ?>

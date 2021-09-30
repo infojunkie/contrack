@@ -231,7 +231,7 @@ function capitalise_first_letter($str)
 function validate_email($str)
 {
 	//returns true if valid email, false if not
-	return (ereg("^.+@.+\\..+$", $str));
+	return preg_match("/^.+@.+\\..+$/", $str);
 }
 
 /*
