@@ -137,7 +137,7 @@
 
 	$newDsn	=	"mysql://pat:pat123@localhost/pat";
 
-	$newDbc =&	DB::connect( $newDsn );
+	$newDbc =	DB::connect( $newDsn );
 
 	$user->addDbc( "new", $newDbc );
 

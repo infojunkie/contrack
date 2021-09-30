@@ -1730,7 +1730,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		$query		=	$this->buildSelectQuery( $table, $fields, $clause, $options );
 
 		//	get the dbc for the statement
-		$dbc		=&	$this->getDbc( $table );
+		$dbc		=	$this->getDbc( $table );
 
 		//	query database
 		return $dbc->getAll( $query, array(), DB_FETCHMODE_ASSOC );
@@ -1902,7 +1902,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				$primaryval	=	$this->getPrimaryValue( $uid, $table, $options["olddata"] );
 		}
 
-		$dbc		=&	$this->getDbc( $table );
+		$dbc		=	$this->getDbc( $table );
 
 		if( !isset( $options["mode"] ) )
 			$options["mode"]	=	"update";
@@ -2045,7 +2045,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 						$uidfield	=	isset( $data["foreign"] ) ? $data["foreign"] : $this->authFields["primary"];
 
 						$query		=	"DELETE FROM ".$tablename." WHERE ".$uidfield."='".$uid."'";
-						$dbc		=&	$this->getDbc( $table );
+						$dbc		=	$this->getDbc( $table );
 
 						$dbc->query( $query );
 					}
@@ -2084,7 +2084,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 				if( $primary && $primaryval )
 					$query	.=	" AND ".$primary."='".$primaryval."'";
 
-				$dbc		=&	$this->getDbc( $table );
+				$dbc		=	$this->getDbc( $table );
 				$dbc->query( $query );
 				if( $dbc->affected_rows() > 0 )
 					return	true;
@@ -2123,7 +2123,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 		$query		=	"SELECT ".$primary." FROM ".$tablename." WHERE ".implode( " AND ", $where );
 
-		$dbc		=&	$this->getDbc( $table );
+		$dbc		=	$this->getDbc( $table );
 
 		$result			=	$dbc->query( $query );
 
@@ -2164,7 +2164,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 		$uidfield	=	isset( $this->tables[$table]["foreign"] ) ? $this->tables[$table]["foreign"] : $this->authFields["primary"];
 
 		$query		=	"SELECT COUNT(*) AS entries FROM ".$tablename." WHERE ".$uidfield."='".$uid."'";
-		$dbc		=&	$this->getDbc( $table );
+		$dbc		=	$this->getDbc( $table );
 		$result		=	$dbc->query( $query );
 
 		if( $result->numRows() == 0 )
