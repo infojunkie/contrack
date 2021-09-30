@@ -13,6 +13,7 @@ services:
       - MYSQL_ROOT_PASSWORD=contrack
     volumes:
       - db:/var/lib/mysql
+      - ./sql:/etc/mysql/conf.d
   contrack:
     build: .
     ports:
