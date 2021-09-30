@@ -1,4 +1,4 @@
-	
+
 <?php
 /**
 * Copyright OpenCraft |  http://www.open-craft.com
@@ -18,11 +18,11 @@
 
 <?php
 /******************************************************************************************
-  	Process file download 
+		Process file download
 
 	This page will handle file download requests
-	
-	Notes: 	
+
+	Notes:
 ******************************************************************************************/
 require_once("db_utils.php");
 require_once("general_utils.php");
@@ -38,9 +38,9 @@ $file_id	= isset($_GET['file_id']) ? $_GET['file_id'] : -1;
 function get_record_from_db()
 {
 	global $file_id, $filename, $type, $size, $data ;
-	
+
 	$sql = "SELECT filename, type, size, data FROM attachment WHERE attachment_id=" . $file_id;
-	$result = mysql_query($sql) or die(mysql_error());	
+	$result = mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_array($result);
 	$filename = $row['filename'];
 	$type	  =	$row['type'];
@@ -51,23 +51,24 @@ function get_record_from_db()
 function do_download()
 {
 	global $filename, $type, $size, $data ;
-	
+
 	get_record_from_db();
-	
+
 	// Send headers
-	header('Cache-Control: no-store, no-cache, must-revalidate'); 
-	header('Content-type: '.$type ); 
-   	header('Content-length: '.$size); 
-   	header('Content-Disposition: attachment; filename= ' .$filename); 
-   	header('Content-Description: Contrade -- Saved Attachment'); 
-	header('Cache-Control: private'); 
+	header('Cache-Control: no-store, no-cache, must-revalidate');
+	header('Content-type: '.$type );
+	header('Content-length: '.$size);
+	header('Content-Disposition: attachment; filename= ' .$filename);
+	header('Content-Description: Contrade -- Saved Attachment');
+	header('Cache-Control: private');
+	header('Content-Transfer-Encoding: binary');
+	ob_clean();
+	flush();
 	echo $data;
+	exit;
 }
 
 ?>
 <?php
-	do_download() 	
+	do_download()
 ?>
-
-
-

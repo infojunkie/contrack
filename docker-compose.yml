@@ -20,3 +20,4 @@ services:
     volumes:
       - ./contrack:/var/www/html
       - ./php.ini:/usr/local/etc/php/php.ini
+      - /var/www/html/uploads
