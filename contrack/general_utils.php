@@ -1074,7 +1074,7 @@ function generate_text_input ($class, $name, $value, $max_length=100)
 /*
 	Generate a password control to be used in a form. $max_length is optional.
 */
-function generate_pwd_input ($class, $name, $value, $max_length=12)
+function generate_pwd_input ($class, $name, $value, $max_length=16)
 {
 	$markup =  "<input class=\"". $class ."\" id=\"". $name ."\" name=\"". $name. "\" type=\"password\" value= \"". $value.
 				"\" maxlength=\"". $max_length ."\" title=\"Max Length is \"".$max_length." characters\"/>\r\n" ;
