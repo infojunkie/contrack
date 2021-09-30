@@ -1517,11 +1517,11 @@ function do_sort(&$sort_by, &$prior_sort_by, &$sort_order, &$glb_arr_sort_indica
 }
 
 /*
-	Version of safe_count() that does not break PHP 8.0
+	Version of count() that does not break PHP 8.0
 	https://stackoverflow.com/a/67971911/209184
 */
-function safe_safe_count($var) {
-	if (is_countable($var)) return safe_count($var);
+function safe_count($var) {
+	if (is_countable($var)) return count($var);
 	return 0;
 }
 

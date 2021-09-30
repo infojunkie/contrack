@@ -257,7 +257,7 @@ function format_gen_order_suppliers($int_row)
 	global $glb_arr_values, $glb_arr_single_order_suppliers;
 
 	$markup = "";
-	$num_rows = safe_safe_count($glb_arr_single_order_suppliers);
+	$num_rows = safe_count($glb_arr_single_order_suppliers);
 	for ($i=0; $i < $num_rows; $i++) {
 		if ($glb_arr_single_order_suppliers[$i]['SUPPLIER_ID'] != NULL) {
 			if ($glb_arr_single_order_suppliers[$i]['GEN_ORDER_ID'] == $glb_arr_values[$int_row]['GEN_ORDER_ID']) {
@@ -266,7 +266,7 @@ function format_gen_order_suppliers($int_row)
 											   "&referrer_id=".$glb_arr_single_order_suppliers[$i]['SUPPLIER_ID']."\">".
 											   $glb_arr_single_order_suppliers[$i]['SUPPLIER_NAME']."</a> ";
 				// Determine whether to add a comma or not
-				if ($i < safe_safe_count($glb_arr_single_order_suppliers) - 1 ){
+				if ($i < safe_count($glb_arr_single_order_suppliers) - 1 ){
 					if ($glb_arr_single_order_suppliers[$i]['GEN_ORDER_ID'] == $glb_arr_single_order_suppliers[$i+1]['GEN_ORDER_ID']) {
 							$markup .= ", ";
 					}
@@ -340,7 +340,7 @@ function show_records_gen_order ( )
 	// Populate values array
 	populate_values_gen_order();
 
-	if (safe_safe_count($glb_arr_values) < 1){					// no rows
+	if (safe_count($glb_arr_values) < 1){					// no rows
 		$markup = '	<table class="info_block">
 					<tr><td> No Matching Records Were Found</td></tr>
 					</table></td></tr> ';
@@ -368,7 +368,7 @@ function show_records_gen_order ( )
 				   <td width="10%"><strong><a href="javascript:doSort(document.frm_search_order, \'PLANNED_DELIVERY_DATE\',\''.$sort_by.'\')">Delivery Date</a></strong>&nbsp;'. $glb_arr_sort_indicators['PLANNED_DELIVERY_DATE'].'</td>
 				   <td width="10%"><strong>% Complete</strong></td>
 				   </tr>';
-		$num_rows = safe_safe_count($glb_arr_values);
+		$num_rows = safe_count($glb_arr_values);
 		$currency_sums_array = array();
 		for ($i=0; $i < $num_rows; $i++) {
 			$currency = $glb_arr_values[$i]['CURRENCY'];
@@ -427,7 +427,7 @@ function show_records_single_order ( )
 	// Populate values array
 	populate_values_single_order();
 
-	if (safe_safe_count($glb_arr_values) < 1){					// no rows
+	if (safe_count($glb_arr_values) < 1){					// no rows
 		$markup = '	<table class="info_block">
 					<tr><td>No Matching Records Were Found</td></tr>
 					</table></td></tr> ';
@@ -453,7 +453,7 @@ function show_records_single_order ( )
 				   <td width="10%"><strong><a href="javascript:doSort(document.frm_search_order, \'PLANNED_DELIVERY_DATE\',\''.$sort_by.'\')">Delivery Date</a></strong>&nbsp;'. $glb_arr_sort_indicators['PLANNED_DELIVERY_DATE'].'</td>
 				   <td width="10%"><strong>% Complete</strong></td>
 				   </tr>';
-		$num_rows = safe_safe_count($glb_arr_values);
+		$num_rows = safe_count($glb_arr_values);
 		$currency_sums_array = array();
 		for ($i=0; $i < $num_rows; $i++) {
 			$currency = $glb_arr_values[$i]['CURRENCY'];
