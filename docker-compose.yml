@@ -17,7 +17,7 @@ services:
   contrack:
     build: .
     ports:
-      - "8080:80"
+      - "${CONTRACK_PORT:-8080}:80"
     volumes:
       - ./contrack:/var/www/html
       - ./php.ini:/usr/local/etc/php/php.ini
