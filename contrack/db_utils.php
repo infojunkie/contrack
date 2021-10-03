@@ -21,12 +21,11 @@
 	This file contains DB-related functions, utilities, and parameters
 ************************************************************************/
 error_reporting( E_ALL );
-require_once("conf/configuration.php");
 require_once("mysql.php");
 
 /* Connect to DB */
-$contrack_connection = mysql_pconnect($hostname_contrack, $username_contrack, $password_contrack) or die(mysql_error());
-mysql_select_db($database_contrack) or die(mysql_error());
+$contrack_connection = mysql_pconnect($_ENV['MYSQL_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD']) or die(mysql_error());
+mysql_select_db($_ENV['MYSQL_DATABASE']) or die(mysql_error());
 
 /*
 	Function: mysql_decode ( )

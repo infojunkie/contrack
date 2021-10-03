@@ -25,7 +25,13 @@ require_once("db_utils.php");
   	This file contains general utilities functions and constants
 ******************************************************************************************/
 
+//  Set Uploads directory and converts backwards slashes to forward slashes
+$upload_dir = str_replace("\\","/", getcwd().'\\'.'uploads'.'\\');
+
 /****** These constants have to be syncrhonized with the database enums ******/
+
+// Company profile party_id. This should by synched up with party table in DB
+define ("COMPANY_PARTY_ID", 1);
 
 // Entity Types
 define ("entity_BUYER", 1);

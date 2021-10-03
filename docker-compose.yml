@@ -19,3 +19,5 @@ services:
       - ./contrack:/var/www/html
       - ./php.ini:/usr/local/etc/php/php.ini
       - /var/www/html/uploads
+    env_file:
+      - ./.env

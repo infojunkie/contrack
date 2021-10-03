@@ -11,7 +11,7 @@
 
 
 	// change the data-source name to fit your needs - see documentation at http://pear.php.net
-	$dsn	=	"mysqli://contrack:contrack@db/contrack";
+	$dsn	=	"mysqli://{$_ENV['MYSQL_USER']}:{$_ENV['MYSQL_PASSWORD']}@{$_ENV['MYSQL_HOST']}/{$_ENV['MYSQL_DATABASE']}";
 
 	//	patTemplate is used for login screen
 
