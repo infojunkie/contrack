@@ -3,7 +3,7 @@ contrack
 
 Contrack is a web-enabled order-centric management software that supports the planning and management of the order's complete life-cycle. It supports order entry, contacts management, production planning and tracking as well as financial monitoring.
 
-It was created in 2005 as a bespoke system for the textile business of our friend.
+It was created in 2005 as a bespoke system for the textile business of our friend, and was the first software created by our [software services company OpenCraft](https://web.archive.org/web/20170422101115/http://www.open-craft.com/).
 
 # Installation
 - Clone `.env.example` to `.env`
