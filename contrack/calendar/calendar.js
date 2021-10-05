@@ -1465,6 +1465,9 @@ Calendar.prototype.parseDate = function (str, fmt) {
 };
 
 Calendar.prototype.hideShowCovered = function () {
+	// Skip this as per https://github.com/infojunkie/contrack/issues/5
+	return;
+
 	var self = this;
 	Calendar.continuation_for_the_fucking_khtml_browser = function() {
 		function getVisib(obj){
@@ -1515,7 +1518,7 @@ Calendar.prototype.hideShowCovered = function () {
 					if (!cc.__msh_save_visibility) {
 						cc.__msh_save_visibility = getVisib(cc);
 					}
-					//cc.style.visibility = "hidden";
+					cc.style.visibility = "hidden";
 				}
 			}
 		}
